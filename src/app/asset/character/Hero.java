@@ -1,7 +1,11 @@
 package app.asset.character;
 
-import app.asset.monster.Monster;
 import app.asset.weapon.Sword;
+
+/*
+ * ヒーローインスタンスの雛形となるクラス
+ * ステータスとして名前、HP、MP、ATKを持つ
+ */
 
 public class Hero {
 	public String name;
@@ -26,7 +30,16 @@ public class Hero {
 	}
 
 	public Hero(String name) {
-		this(name, 200, 30, 50);
+		this(name, 500, 30, 50);
+	}
+	
+	public void showStatus() {
+		System.out.println("=====================");
+		System.out.println("名前: " + this.name);
+		System.out.println("HP: " + this.hp);
+		System.out.println("MP: " + this.mp);
+		System.out.println("ATK: " + this.atk);
+		System.out.println("=====================");
 	}
 
 	public void attack(Monster m) {

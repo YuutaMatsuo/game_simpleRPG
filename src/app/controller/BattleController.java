@@ -1,69 +1,62 @@
 package app.controller;
 
-import java.util.Random;
-import java.util.Scanner;
-
 import app.asset.character.Hero;
-import app.asset.monster.Monster;
-import app.manager.BattleManager;
-import app.manager.ViewManager;
+import app.asset.character.Monster;
+import app.utility.BattleUtil;
+import app.utility.Util;
+import app.utility.ViewUtil;
+
+/*
+ * 戦闘に関するメニュー選択や進行を行うクラス
+ * インスタンスを持たないstaticクラス
+ */
 
 public class BattleController {
-	private Hero[] heros = new Hero[3];
+	static Hero[] heros = new Hero[1];
 
-	private ViewManager vm;
-	private BattleManager bm;
-
-	public BattleController() {
-		heros[0] = new Hero("戦士");
-		heros[1] = new Hero("魔法使い");
-		heros[2] = new Hero("僧侶");
-
-		this.vm = new ViewManager();
-		this.bm = new BattleManager();
-	}
-
-	public void start() {
-		Scanner scanner = new Scanner(System.in);
-		vm.scroll(60);
-		System.out.println("冒険に出発！");
-		this.battle();
-	}
-
-	public void battle() {
-		Scanner scanner = new Scanner(System.in);
-		Random random = new Random();
-
-		Monster[] monsters = bm.popMonster(random.nextInt(1, 3));
+	//戦闘を行うメソッド
+	public static void battle() {
+		Monster[] monsters = BattleUtil.popMonster(Util.random.nextInt(1, 5));
 		for (Monster m : monsters) {
 			System.out.println(m.name + "が現れた!");
-			vm.wait(1);
+			ViewUtil.wait(1);
 		}
-		vm.scrollSlow(2);
-
-		while (monsters[0].isAlive() == true) {
+		ViewUtil.scrollSlow(2);
+		
+		//モンスターが全滅するか、ヒーローが全滅するまで戦闘を繰り返す
+		while (BattleUtil.isAllDead(monsters) == false && BattleUtil.isAllDead(heros) == false) {
 			System.out.println("1.戦う");
 			System.out.println("2.逃げる");
 			System.out.print(">>");
 
-			String nextAction = scanner.nextLine();
+			String nextAction = Util.scanner.nextLine();
 
 			if ("2".equals(nextAction)) {
-				vm.scrollSlow(2);
+				ViewUtil.scrollSlow(2);
 				System.out.println("勇者たちは逃げ出した");
 				break;
 			}
 
 			switch (nextAction) {
 			case "1":
-				bm.attak(heros, monsters);
-				bm.attak(monsters, heros);
+				BattleUtil.attak(heros, monsters);
+				BattleUtil.attak(monsters, heros);
 				System.out.println("====================");
-				for(Monster m : monsters) {
+				for (Monster m : monsters) {
+					if (m.isAlive() == false) {
+						continue;
+					}
 					System.out.println(m.name + " HP:" + m.hp);
 				}
-				vm.scrollSlow(2);
-				for(Hero h : heros) {
+				ViewUtil.scrollSlow(2);
+				for (Hero h : heros) {
+					if (h.isAlive() == false) {
+						ViewUtil.scrollSlow(4);
+						System.out.println("GAME OVER");
+						ViewUtil.wait(3);
+						ViewUtil.scroll(60);
+						Controller.start();
+					}
 					System.out.println(h.name + " HP:" + h.hp);
 				}
 				System.out.println("====================\n");
@@ -71,7 +64,7 @@ public class BattleController {
 			}
 		}
 		System.out.println("\n戦闘終了！\n");
-		scanner.nextLine();
-		this.start();
+		Util.scanner.nextLine();
+		Controller.topMenu();
 	}
 }

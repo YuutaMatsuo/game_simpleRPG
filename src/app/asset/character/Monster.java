@@ -1,6 +1,9 @@
-package app.asset.monster;
+package app.asset.character;
 
-import app.asset.character.Hero;
+/*
+ * モンスターインスタンスの雛形となるクラス
+ * ステータスとして名前、HP、ATKを持つ
+ */
 
 public class Monster {
 	public String name;
