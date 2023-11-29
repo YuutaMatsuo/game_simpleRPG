@@ -12,12 +12,12 @@ public class ViewManager {
 		}
 	}
 
-	public void slowl(int i) {
+	public void scrollSlow(int i) {
 		while (i > 0 && i % 2 == 0) {
 			System.out.println();
 			System.out.println();
 			try {
-				Thread.sleep(800);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 			}
 			i--;
