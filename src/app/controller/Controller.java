@@ -1,51 +1,79 @@
 package app.controller;
 
-import java.util.Scanner;
+import app.utility.Util;
+import app.utility.ViewUtil;
 
-import app.manager.BattleManager;
-import app.manager.ViewManager;
+/*
+ * メニュー選択や進行を行うクラス
+ * 
+ */
 
 public class Controller {
-	private ViewManager vm;
-	private BattleManager bm;
+	BattleController bc = new BattleController();
 
-	public Controller() {
-		this.vm = new ViewManager();
-		this.bm = new BattleManager();
-	}
-
+	// メインメニュー
 	public void start() {
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("simpleRPGへようこそ！\n");
-		vm.wait(3);
-		vm.scroll(70);
+		ViewUtil.showTitle();
+		ViewUtil.wait(2);
+		ViewUtil.scroll(10);
 
 		while (true) {
-			System.out.println("実行する操作を選んでください");
-			System.out.println("1.冒険に出る");
-			System.out.println("2.宿屋に泊まる");
-			System.out.println("3.お店に行く");
+			System.out.println("1.はじめから");
+			System.out.println("2.つづきから");
+			System.out.println("3.デバッグモード");
 			System.out.println("4.終了する");
 			System.out.print(">>");
 
-			String nextAction = scanner.nextLine();
+			String nextAction = Util.scanner.nextLine();
 
 			if ("4".equals(nextAction)) {
 				System.out.println("ゲームを終了します");
+				System.exit(0);
 				break;
 			}
 
 			switch (nextAction) {
 			case "1":
-				bm.start();
+				bc.initialize();
+				this.topMenu();
 				break;
 			case "2":
-				System.out.println("現在準備中");
+				System.out.println("現在準備中\n");
+				ViewUtil.wait(2);
+				ViewUtil.scroll(60);
+				this.start();
 				break;
 			case "3":
-				System.out.println("現在準備中");
+				bc.debugMenu();
 				break;
 			}
+		}
+	}
+
+	// トップメニュー
+	public void topMenu() {
+		ViewUtil.scrollSlow(4);
+		System.out.println("実行するメニューを選択してください");
+		System.out.println("1.冒険に出る");
+		System.out.println("4.終了する");
+		System.out.print(">>");
+
+		String nextAction = Util.scanner.nextLine();
+
+		if ("4".equals(nextAction)) {
+			System.out.println("メインメニューへ戻ります");
+			this.start();
+		}
+
+		switch (nextAction) {
+		case "1":
+			bc.battle();
+			this.topMenu();
+			break;
+		default: {
+			System.out.println("正しい値を入力してください");
+			this.topMenu();
+		}
 		}
 	}
 }
