@@ -9,27 +9,43 @@ public class Monster {
 	public String name;
 	public int hp;
 	public int atk;
+	public int def;
 
-	public Monster(String name, int hp, int atk) {
+	// モンスターのインスタンスを生成する際は、MonsterTableを参照して引数を渡す
+	// 必ず４つすべての要素を引数に渡す
+	public Monster(String name, int hp, int atk, int def) {
 		this.name = name;
 		this.hp = hp;
 		this.atk = atk;
-	}
-
-	public Monster(String name, int hp) {
-		this(name, hp, 10);
-	}
-
-	public Monster(String name) {
-		this(name, 100, 10);
+		this.def = def;
 	}
 
 	public void attack(Hero h) {
-		System.out.println(this.name + "は攻撃した！");
-		System.out.println(h.name + "に" + this.atk + "ポイントのダメージを与えた！");
-		h.hp -= this.atk;
+			int damage = this.atk - h.def;
+			if(damage < 0) {
+				damage = 0;
+			}
+			System.out.println(this.name + "のこうげき！");
+			System.out.println(h.name + "に" + damage + "のダメージ！");
+			h.hp -= damage;
+			System.out.println("テスト2");
 	}
 	
+	public void showStatus() {
+		System.out.println("HP: " + this.hp);
+		System.out.println("ATK: " + this.atk);
+		System.out.println("DEF: " + this.def);
+		System.out.println();
+	}
+	
+	public void showAllStatus() {
+		System.out.println(this.name);
+		System.out.println("HP: " + this.hp);
+		System.out.println("ATK: " + this.atk);
+		System.out.println("DEF: " + this.def);
+		System.out.println();
+	}
+
 	public boolean isAlive() {
 		return this.hp > 0;
 	}

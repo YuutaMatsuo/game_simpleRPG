@@ -5,8 +5,8 @@ import app.asset.character.Monster;
 import app.table.MonsterTable;
 
 /*
- * バトルに関する処理をまとめたクラス
- * インスタンスを持たないstaticクラス
+ * バトルに関する共有したい処理をまとめたクラス
+ * インスタンスを持たない
  */
 
 public class BattleUtil {
@@ -20,7 +20,7 @@ public class BattleUtil {
 		for (int i = 0; i < num; i++) {
 			r = Util.random.nextInt(MonsterTable.monsterName.length);
 			monsters[i] = new Monster(MonsterTable.monsterName[r], MonsterTable.monsterStatus[r][0],
-					MonsterTable.monsterStatus[r][1]);
+					MonsterTable.monsterStatus[r][1], MonsterTable.monsterStatus[r][2]);
 		}
 		return monsters;
 	}
@@ -31,14 +31,16 @@ public class BattleUtil {
 	public static void attak(Hero[] h, Monster[] m) {
 		int r;
 		for (Hero hero : h) {
-			do {
-				r = Util.random.nextInt(m.length);
-			} while (m[r].isAlive() == false);
 			if (hero.isAlive() == false) {
 				continue;
+			} else {
+				do {
+					r = Util.random.nextInt(m.length);
+				} while (m[r].isAlive() == false);
+
+				hero.attack(m[r]);
+				ViewUtil.scrollSlow(2);
 			}
-			hero.attack(m[r]);
-			ViewUtil.scrollSlow(2);
 		}
 	}
 
@@ -48,14 +50,15 @@ public class BattleUtil {
 	public static void attak(Monster[] m, Hero[] h) {
 		int r;
 		for (Monster monster : m) {
-			do {
-				r = Util.random.nextInt(h.length);
-			} while (h[r].isAlive() == false);
 			if (monster.isAlive() == false) {
 				continue;
+			} else {
+				do {
+					r = Util.random.nextInt(h.length);
+				} while (h[r].isAlive() == false);
+				monster.attack(h[r]);
+				ViewUtil.scrollSlow(2);
 			}
-			monster.attack(h[r]);
-			ViewUtil.scrollSlow(2);
 		}
 	}
 
@@ -85,19 +88,18 @@ public class BattleUtil {
 			if (monster.isAlive() == false) {
 				continue;
 			}
-			System.out.println(monster.name + " HP:" + monster.hp);
-			ViewUtil.scrollSlow(2);
+//			System.out.println("♦" + monster.name + " HP:" + monster.hp);
+			monster.showAllStatus();
 		}
 	}
-	
-	//ヒーローの残りHPを表示
+
+	// ヒーローの残りHPを表示
 	public static void showHeroHp(Hero[] h) {
 		for (Hero hero : h) {
 			if (hero.isAlive() == false) {
 				continue;
 			}
 			System.out.println(hero.name + "HP:" + hero.hp);
-			ViewUtil.scrollSlow(2);
 		}
 	}
 }
