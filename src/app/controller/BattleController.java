@@ -8,7 +8,7 @@ import app.utility.ViewUtil;
 
 /*
  * 戦闘に関するメニュー選択や進行を行うクラス
- * インスタンスを持たないstaticクラス
+ * 
  */
 
 public class BattleController {
@@ -75,11 +75,9 @@ public class BattleController {
 
 			switch (nextAction) {
 			case "1":
-				System.out.println("テスト上");
 				BattleUtil.attak(heros, monsters);
 				BattleUtil.attak(monsters, heros);
 				BattleUtil.showMonsterHp(monsters);
-				System.out.println("テスト下");
 				ViewUtil.scroll(2);
 				break;
 			case "2":

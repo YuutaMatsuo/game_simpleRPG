@@ -28,7 +28,6 @@ public class Monster {
 			System.out.println(this.name + "のこうげき！");
 			System.out.println(h.name + "に" + damage + "のダメージ！");
 			h.hp -= damage;
-			System.out.println("テスト2");
 	}
 	
 	public void showStatus() {

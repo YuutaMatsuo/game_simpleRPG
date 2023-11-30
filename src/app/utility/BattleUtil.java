@@ -33,14 +33,15 @@ public class BattleUtil {
 		for (Hero hero : h) {
 			if (hero.isAlive() == false) {
 				continue;
-			} else {
-				do {
-					r = Util.random.nextInt(m.length);
-				} while (m[r].isAlive() == false);
-
-				hero.attack(m[r]);
-				ViewUtil.scrollSlow(2);
 			}
+			if (BattleUtil.isAllDead(m)) {
+				continue;
+			}
+			do {
+				r = Util.random.nextInt(m.length);
+			} while (m[r].isAlive() == false);
+			hero.attack(m[r]);
+			ViewUtil.scrollSlow(2);
 		}
 	}
 
@@ -52,13 +53,15 @@ public class BattleUtil {
 		for (Monster monster : m) {
 			if (monster.isAlive() == false) {
 				continue;
-			} else {
-				do {
-					r = Util.random.nextInt(h.length);
-				} while (h[r].isAlive() == false);
-				monster.attack(h[r]);
-				ViewUtil.scrollSlow(2);
 			}
+			if (BattleUtil.isAllDead(h)) {
+				continue;
+			}
+			do {
+				r = Util.random.nextInt(h.length);
+			} while (h[r].isAlive() == false);
+			monster.attack(h[r]);
+			ViewUtil.scrollSlow(2);
 		}
 	}
 

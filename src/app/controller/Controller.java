@@ -5,7 +5,7 @@ import app.utility.ViewUtil;
 
 /*
  * メニュー選択や進行を行うクラス
- * インスタンスを持たないstaticクラス
+ * 
  */
 
 public class Controller {

@@ -57,7 +57,6 @@ public class Hero {
 		System.out.println(this.name + "は攻撃した！");
 		System.out.println(m.name + "に" + damage + "ポイントのダメージを与えた！");
 		m.hp -= damage;
-		System.out.println("テスト1");
 	}
 
 	public boolean isAlive() {
