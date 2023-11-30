@@ -35,7 +35,7 @@ public class Controller {
 			switch (nextAction) {
 			case "1":
 				bc.initialize();
-				this.topMenu();
+				this.menu();
 				break;
 			case "2":
 				System.out.println("現在準備中\n");
@@ -51,7 +51,7 @@ public class Controller {
 	}
 
 	// トップメニュー
-	public void topMenu() {
+	public void menu() {
 		ViewUtil.scrollSlow(4);
 		System.out.println("実行するメニューを選択してください");
 		System.out.println("1.冒険に出る");
@@ -68,11 +68,11 @@ public class Controller {
 		switch (nextAction) {
 		case "1":
 			bc.battle();
-			this.topMenu();
+			this.menu();
 			break;
 		default: {
 			System.out.println("正しい値を入力してください");
-			this.topMenu();
+			this.menu();
 		}
 		}
 	}

@@ -105,4 +105,14 @@ public class BattleUtil {
 			System.out.println(hero.name + "HP:" + hero.hp);
 		}
 	}
+	
+	// モンスターの配列を受け取り１体ずつ表示
+	public static void showMonster(Monster[] monsters) {
+		for (Monster m : monsters) {
+			System.out.println(m.name + "が現れた!");
+			m.showStatus();
+			ViewUtil.wait(1);
+		}
+		ViewUtil.scrollSlow(2);
+	}
 }

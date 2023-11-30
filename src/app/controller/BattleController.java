@@ -21,7 +21,7 @@ public class BattleController {
 	public BattleController() {
 		warrior = new Hero("戦士", 150, 0, 20, 35);
 		mage = new Hero("魔法使い", 70, 50, 35, 10);
-		
+
 		heros[1] = warrior;
 		heros[2] = mage;
 	}
@@ -48,20 +48,18 @@ public class BattleController {
 
 	// 戦闘を行うメソッド
 	public void battle() {
+		/*
+		 * popMonsterメソッド 引数として受け取った数に応じたMonster型のインスタンスを生成し、配列に格納したあと戻り値として値を返す
+		 */
 		Monster[] monsters = BattleUtil.popMonster(Util.random.nextInt(1, 5));
-		for (Monster m : monsters) {
-			System.out.println(m.name + "が現れた!");
-			m.showStatus();
-			ViewUtil.wait(1);
-		}
-		ViewUtil.scrollSlow(2);
+		BattleUtil.showMonster(monsters);
 
 		// モンスターが全滅するか、ヒーローが全滅するまで戦闘を繰り返す
 		while (BattleUtil.isAllDead(monsters) == false && BattleUtil.isAllDead(heros) == false) {
 			System.out.println("=========================================");
-			System.out.println("1.たたかう    " + heros[0].name + "HP:" + heros[0].hp);
-			System.out.println("2.ぼうぎょ    " + heros[1].name + "HP:" + heros[1].hp);
-			System.out.println("3.逃げる      " + heros[2].name + "HP:" + heros[2].hp);
+			System.out.println("1.たたかう       " + heros[0].name + "   HP:" + heros[0].hp + "  MP:" + heros[0].mp);
+			System.out.println("2.ぼうぎょ       " + heros[1].name + "   HP:" + heros[1].hp + "  MP:" + heros[1].mp);
+			System.out.println("3.逃げる      " + heros[2].name + "  HP:" + heros[2].hp + "   MP:" + heros[2].mp);
 			System.out.println("=========================================");
 			System.out.print("\n>>");
 
@@ -114,7 +112,7 @@ public class BattleController {
 		Util.scanner.nextLine();
 		System.exit(0);
 	}
-	
+
 	// デバッグモード
 	// ヒーローのステータスを9999に設定する
 	public void debugMenu() {
