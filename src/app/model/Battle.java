@@ -120,6 +120,16 @@ public class Battle {
 		ViewUtil.scrollSlow(2);
 	}
 	
+	// モンスターの合計経験値を計算し戻り値として返す
+		public static int totalGold(Monster[] monsters) {
+			int gold = 0;
+			for(Monster m : monsters) {
+				exp += m.exp;
+			}
+			return exp;
+		}
+	
+	// モンスターの合計経験値を計算し戻り値として返す
 	public static int totalExp(Monster[] monsters) {
 		int exp = 0;
 		for(Monster m : monsters) {
@@ -128,6 +138,7 @@ public class Battle {
 		return exp;
 	}
 	
+	//　ヒーローの経験値を増やすメソッド
 	public static void addExp(Hero[] heros, int exp) {
 		for (Hero h : heros) {
 			h.exp += exp;
