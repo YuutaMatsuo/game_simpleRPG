@@ -8,8 +8,8 @@ package app.table;
 public class MonsterTable {
 	public static String[] monsterName = { "スライム", "おばけきのこ", "メタルスライム" };
 	public static int[][] monsterStatus = {
-			{ 70, 5 , 5}, // スライム HP atk def
-			{ 50, 9 , 3}, // おばけきのこ HP atk def
-			{ 30, 20 , 15}, // メタルスライム HP atk def
+			{ 35, 5 , 0}, // スライム HP atk def
+			{ 42, 9 , 0}, // おばけきのこ HP atk def
+			{ 70, 12 , 0}, // メタルスライム HP atk def
 	};
 }

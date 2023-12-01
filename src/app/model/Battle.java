@@ -1,15 +1,17 @@
-package app.utility;
+package app.model;
 
 import app.asset.character.Hero;
 import app.asset.character.Monster;
 import app.table.MonsterTable;
+import app.utility.Util;
+import app.utility.ViewUtil;
 
 /*
  * バトルに関する共有したい処理をまとめたクラス
  * インスタンスを持たない
  */
 
-public class BattleUtil {
+public class Battle {
 
 	// 引数として受け取った数のモンスターのインスタンスを作成し
 	// 配列に格納して戻り値として返す
@@ -34,7 +36,7 @@ public class BattleUtil {
 			if (hero.isAlive() == false) {
 				continue;
 			}
-			if (BattleUtil.isAllDead(m)) {
+			if (Battle.isAllDead(m)) {
 				continue;
 			}
 			do {
@@ -54,7 +56,7 @@ public class BattleUtil {
 			if (monster.isAlive() == false) {
 				continue;
 			}
-			if (BattleUtil.isAllDead(h)) {
+			if (Battle.isAllDead(h)) {
 				continue;
 			}
 			do {
@@ -82,6 +84,7 @@ public class BattleUtil {
 				return false;
 			}
 		}
+		m = null;
 		return true;
 	}
 

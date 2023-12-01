@@ -16,6 +16,8 @@ public class Controller {
 		ViewUtil.showTitle();
 		ViewUtil.wait(2);
 		ViewUtil.scroll(10);
+		
+	
 
 		while (true) {
 			System.out.println("1.はじめから");

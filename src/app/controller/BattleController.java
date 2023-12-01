@@ -2,7 +2,8 @@ package app.controller;
 
 import app.asset.character.Hero;
 import app.asset.character.Monster;
-import app.utility.BattleUtil;
+import app.model.Battle;
+import app.table.heroStatusTable;
 import app.utility.Util;
 import app.utility.ViewUtil;
 
@@ -19,8 +20,14 @@ public class BattleController {
 	private Hero mage;
 
 	public BattleController() {
-		warrior = new Hero("戦士", 150, 0, 20, 35);
-		mage = new Hero("魔法使い", 70, 50, 35, 10);
+		this.warrior = new Hero("戦士", 1, heroStatusTable.heroStatusMaster[1][0][0],
+				heroStatusTable.heroStatusMaster[1][0][0], heroStatusTable.heroStatusMaster[1][0][1],
+				heroStatusTable.heroStatusMaster[1][0][2], heroStatusTable.heroStatusMaster[1][0][3],
+				heroStatusTable.heroStatusMaster[1][0][4]);
+		this.mage = new Hero("魔法使い", 1, heroStatusTable.heroStatusMaster[0][0][0],
+				heroStatusTable.heroStatusMaster[2][0][0], heroStatusTable.heroStatusMaster[2][0][1],
+				heroStatusTable.heroStatusMaster[2][0][2], heroStatusTable.heroStatusMaster[2][0][3],
+				heroStatusTable.heroStatusMaster[2][0][4]);
 
 		heros[1] = warrior;
 		heros[2] = mage;
@@ -35,7 +42,10 @@ public class BattleController {
 		System.out.print(">>");
 
 		String name = Util.scanner.nextLine();
-		this.hero = new Hero("勇者" + name);
+		this.hero = new Hero("勇者" + name, 1, heroStatusTable.heroStatusMaster[0][0][0],
+				heroStatusTable.heroStatusMaster[0][0][0], heroStatusTable.heroStatusMaster[0][0][1],
+				heroStatusTable.heroStatusMaster[0][0][2], heroStatusTable.heroStatusMaster[0][0][3],
+				heroStatusTable.heroStatusMaster[0][0][4]);
 		this.heros[0] = this.hero;
 		ViewUtil.scrollSlow(2);
 
@@ -51,15 +61,15 @@ public class BattleController {
 		/*
 		 * popMonsterメソッド 引数として受け取った数に応じたMonster型のインスタンスを生成し、配列に格納したあと戻り値として値を返す
 		 */
-		Monster[] monsters = BattleUtil.popMonster(Util.random.nextInt(1, 5));
-		BattleUtil.showMonster(monsters);
+		Monster[] monsters = Battle.popMonster(Util.random.nextInt(1, 5));
+		Battle.showMonster(monsters);
 
 		// モンスターが全滅するか、ヒーローが全滅するまで戦闘を繰り返す
-		while (BattleUtil.isAllDead(monsters) == false && BattleUtil.isAllDead(heros) == false) {
+		while (Battle.isAllDead(monsters) == false && Battle.isAllDead(heros) == false) {
 			System.out.println("=========================================");
-			System.out.println("1.たたかう       " + heros[0].name + "   HP:" + heros[0].hp + "  MP:" + heros[0].mp);
-			System.out.println("2.ぼうぎょ       " + heros[1].name + "   HP:" + heros[1].hp + "  MP:" + heros[1].mp);
-			System.out.println("3.逃げる      " + heros[2].name + "  HP:" + heros[2].hp + "   MP:" + heros[2].mp);
+			System.out.println("1.たたかう       Lv." + heros[0].level + " " + heros[0].name + "   HP:" + heros[0].hp + "  MP:" + heros[0].mp);
+			System.out.println("2.ぼうぎょ       Lv." + heros[1].level + " " + heros[1].name + "   HP:" + heros[1].hp + "  MP:" + heros[1].mp);
+			System.out.println("3.逃げる      Lv." + heros[2].level + " " + heros[2].name + "  HP:" + heros[2].hp + "   MP:" + heros[2].mp);
 			System.out.println("=========================================");
 			System.out.print("\n>>");
 
@@ -73,9 +83,9 @@ public class BattleController {
 
 			switch (nextAction) {
 			case "1":
-				BattleUtil.attak(heros, monsters);
-				BattleUtil.attak(monsters, heros);
-				BattleUtil.showMonsterHp(monsters);
+				Battle.attak(heros, monsters);
+				Battle.attak(monsters, heros);
+				Battle.showMonsterHp(monsters);
 				ViewUtil.scroll(2);
 				break;
 			case "2":
@@ -89,13 +99,13 @@ public class BattleController {
 	}
 
 	public void debugBattle() {
-		Monster[] monsters = BattleUtil.popMonster(Util.random.nextInt(1, 5));
+		Monster[] monsters = Battle.popMonster(Util.random.nextInt(1, 5));
 		for (Monster m : monsters) {
 			System.out.println(m.name + "が現れた!");
 			ViewUtil.wait(1);
 		}
 		ViewUtil.scrollSlow(2);
-		while (BattleUtil.isAllDead(monsters) == false && BattleUtil.isAllDead(heros) == false) {
+		while (Battle.isAllDead(monsters) == false && Battle.isAllDead(heros) == false) {
 			System.out.println("=========================================");
 			System.out.println("1.たたかう    :" + heros[0].name + "HP:" + heros[0].hp);
 			System.out.println("2.ぼうぎょ");
@@ -103,9 +113,9 @@ public class BattleController {
 			System.out.println("=========================================");
 			System.out.print("\n>>");
 
-			BattleUtil.attak(heros, monsters);
-			BattleUtil.attak(monsters, heros);
-			BattleUtil.showMonsterHp(monsters);
+			Battle.attak(heros, monsters);
+			Battle.attak(monsters, heros);
+			Battle.showMonsterHp(monsters);
 			ViewUtil.scroll(2);
 		}
 		System.out.println("\n戦闘終了！\n");
@@ -116,7 +126,7 @@ public class BattleController {
 	// デバッグモード
 	// ヒーローのステータスを9999に設定する
 	public void debugMenu() {
-		this.hero = new Hero("無敵の勇者", 9999, 9999, 9999, 9999);
+		this.hero = new Hero("無敵の勇者", 99, 999, 999, 999, 100, 999, 9999);
 		this.heros[0] = this.hero;
 
 		ViewUtil.scrollSlow(4);

@@ -9,34 +9,31 @@ import app.asset.weapon.Sword;
 
 public class Hero {
 	public String name;
+	public int level;
 	public int hp;
+	public int maxHp;
 	public int mp;
 	public int atk;
 	public int def;
+	public int exp;
+	static int gold;
+
 	Sword sword;
 
-	public Hero(String name, int hp, int mp, int atk, int def) {
+	public Hero(String name, int level, int hp, int maxHp, int mp, int atk, int def, int exp) {
 		this.name = name;
+		this.level = level;
 		this.hp = hp;
+		this.maxHp = maxHp;
 		this.mp = mp;
 		this.atk = atk;
 		this.def = def;
-	}
-
-	public Hero(String name, int hp, int mp, int atk) {
-		this(name, hp, mp, atk, 10);
-	}
-
-	public Hero(String name, int hp, int mp) {
-		this(name, hp, mp, 20, 10);
-	}
-
-	public Hero(String name, int hp) {
-		this(name, hp, 30, 20, 10);
+		this.exp = exp;
+		this.gold = 500;
 	}
 
 	public Hero(String name) {
-		this(name, 100, 30, 20, 10);
+		this(name, 1, 100, 100, 10, 10, 10, 0);
 	}
 
 	public void showStatus() {
