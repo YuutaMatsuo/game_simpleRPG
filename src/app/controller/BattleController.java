@@ -63,15 +63,12 @@ public class BattleController {
 		 */
 		Monster[] monsters = Battle.popMonster(Util.random.nextInt(1, 5));
 		Battle.showMonster(monsters);
+		ViewUtil.scroll(2);
+		int exp = Battle.totalExp(monsters);
 
 		// モンスターが全滅するか、ヒーローが全滅するまで戦闘を繰り返す
 		while (Battle.isAllDead(monsters) == false && Battle.isAllDead(heros) == false) {
-			System.out.println("=========================================");
-			System.out.println("1.たたかう       Lv." + heros[0].level + " " + heros[0].name + "   HP:" + heros[0].hp + "  MP:" + heros[0].mp);
-			System.out.println("2.ぼうぎょ       Lv." + heros[1].level + " " + heros[1].name + "   HP:" + heros[1].hp + "  MP:" + heros[1].mp);
-			System.out.println("3.逃げる      Lv." + heros[2].level + " " + heros[2].name + "  HP:" + heros[2].hp + "   MP:" + heros[2].mp);
-			System.out.println("=========================================");
-			System.out.print("\n>>");
+			ViewUtil.battleMenu(heros);
 
 			String nextAction = Util.scanner.nextLine();
 
@@ -94,47 +91,63 @@ public class BattleController {
 				break;
 			}
 		}
-		System.out.println("\n戦闘終了！\n");
+		System.out.println("戦闘終了！");
+		ViewUtil.scrollSlow(4);
+		Battle.addExp(heros, exp);
+		ViewUtil.scroll(2);
+		Battle.LevelUp(heros);
 		Util.scanner.nextLine();
 	}
 
 	public void debugBattle() {
-		Monster[] monsters = Battle.popMonster(Util.random.nextInt(1, 5));
-		for (Monster m : monsters) {
-			System.out.println(m.name + "が現れた!");
-			ViewUtil.wait(1);
-		}
-		ViewUtil.scrollSlow(2);
-		while (Battle.isAllDead(monsters) == false && Battle.isAllDead(heros) == false) {
-			System.out.println("=========================================");
-			System.out.println("1.たたかう    :" + heros[0].name + "HP:" + heros[0].hp);
-			System.out.println("2.ぼうぎょ");
-			System.out.println("3.逃げる");
-			System.out.println("=========================================");
-			System.out.print("\n>>");
-
-			Battle.attak(heros, monsters);
-			Battle.attak(monsters, heros);
-			Battle.showMonsterHp(monsters);
+		for (int i = 0; i < 30; i++) {
+			Monster[] monsters = Battle.popMonster(Util.random.nextInt(1, 5));
+			int exp = Battle.totalExp(monsters);
 			ViewUtil.scroll(2);
+			Battle.showMonster(monsters);
+
+			while (Battle.isAllDead(monsters) == false && Battle.isAllDead(heros) == false) {
+				ViewUtil.battleMenu(heros);
+
+				Battle.attak(heros, monsters);
+				Battle.attak(monsters, heros);
+				Battle.showMonsterHp(monsters);
+				ViewUtil.scroll(2);
+
+			}
+			System.out.println("戦闘終了！");
+			ViewUtil.scrollSlow(4);
+			Battle.addExp(heros, exp);
+			ViewUtil.scroll(2);
+			Battle.LevelUp(heros);
 		}
-		System.out.println("\n戦闘終了！\n");
-		Util.scanner.nextLine();
-		System.exit(0);
+		this.debugMenu();
 	}
 
 	// デバッグモード
 	// ヒーローのステータスを9999に設定する
-	public void debugMenu() {
-		this.hero = new Hero("無敵の勇者", 99, 999, 999, 999, 100, 999, 9999);
+	public void debugInitialize() {
+		this.hero = new Hero("無敵の勇者", 99, 999, 999, 999, 30, 999, 100);
+		this.warrior = new Hero("無敵の戦士", 99, 999, 999, 999, 30, 999, 100);
+		this.mage = new Hero("無敵の魔法使い", 99, 999, 999, 999, 30, 999, 100);
 		this.heros[0] = this.hero;
+		this.heros[1] = this.warrior;
+		this.heros[2] = this.mage;
+		//Heroインスタンスのデバッグフラグをtrueにする
+		//Levelマックスキャラの為、レベルアップ処理をスキップさせる。
+		this.hero.debugMode = true;
+		this.warrior.debugMode = true;
+		this.mage.debugMode = true;
 
-		ViewUtil.scrollSlow(4);
 		System.out.println("===デバッグモードに入りました===");
-		ViewUtil.wait(1);
+		System.out.println();
 		System.out.println("あなたのステータスは以下の通りです");
 		this.hero.showStatus();
-		ViewUtil.wait(1);
+		ViewUtil.scroll(2);
+		this.debugMenu();
+	}
+
+	public void debugMenu() {
 		System.out.println("実行するメニューを選択してください");
 		System.out.println("1.冒険に出る");
 		System.out.println("2.戦闘画面チェック");

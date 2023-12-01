@@ -10,14 +10,16 @@ public class Monster {
 	public int hp;
 	public int atk;
 	public int def;
+	public int exp;
 
 	// モンスターのインスタンスを生成する際は、MonsterTableを参照して引数を渡す
 	// 必ず４つすべての要素を引数に渡す
-	public Monster(String name, int hp, int atk, int def) {
+	public Monster(String name, int hp, int atk, int def, int exp) {
 		this.name = name;
 		this.hp = hp;
 		this.atk = atk;
 		this.def = def;
+		this.exp = exp;
 	}
 
 	public void attack(Hero h) {

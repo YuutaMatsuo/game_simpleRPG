@@ -3,6 +3,9 @@ package app.table;
 public class heroStatusTable {
 	// ヒーローのレベルごとのステータスを定義するマスターテーブルクラス
 	
+	
+	public static final int MAX_LEVEL = 5;
+	
 	//各種ヒーローのステータスのベースとなる値
 	public static final int[][] heroStatusBase = {
 			//勇者のベースステータス  HP/ MP/ ATK/ DEF/ 必要経験値
@@ -15,10 +18,6 @@ public class heroStatusTable {
 	
 	//各レベルごとにステータスの上昇率を定義する
 	public static final int[] statMagnification = {1, 2, 3, 4, 5};
-	
-	
-	
-	
 	
 	//三次元配列 [勇者、戦士、魔法使い] [ヒーロー毎のレベル] [レベルごとのステータス]
 	//レベルアップ処理で使用

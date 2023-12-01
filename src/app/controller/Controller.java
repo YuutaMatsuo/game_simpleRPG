@@ -46,7 +46,7 @@ public class Controller {
 				this.start();
 				break;
 			case "3":
-				bc.debugMenu();
+				bc.debugInitialize();
 				break;
 			}
 		}

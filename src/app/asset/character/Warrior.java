@@ -3,12 +3,7 @@ package app.asset.character;
 import app.asset.weapon.Sword;
 import app.table.heroStatusTable;
 
-/*
- * ヒーローインスタンスの雛形となるクラス
- * ステータスとして名前、HP、MP、ATKを持つ
- */
-
-public class Hero {
+public class Warrior {
 	public String name;
 	public int level;
 	public int hp;
@@ -23,7 +18,7 @@ public class Hero {
 
 	Sword sword;
 
-	public Hero(String name, int level, int hp, int maxHp, int mp, int atk, int def, int exp) {
+	public Warrior(String name, int level, int hp, int maxHp, int mp, int atk, int def, int exp) {
 		this.name = name;
 		this.level = level;
 		this.hp = hp;
@@ -35,7 +30,7 @@ public class Hero {
 		this.gold = 500;
 	}
 
-	public Hero(String name) {
+	public Warrior(String name) {
 		this(name, 1, 100, 100, 10, 10, 10, 0);
 	}
 
@@ -70,5 +65,4 @@ public class Hero {
 	public boolean isAlive() {
 		return this.hp > 0;
 	}
-
 }

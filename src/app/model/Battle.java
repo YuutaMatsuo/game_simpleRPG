@@ -3,6 +3,7 @@ package app.model;
 import app.asset.character.Hero;
 import app.asset.character.Monster;
 import app.table.MonsterTable;
+import app.table.heroStatusTable;
 import app.utility.Util;
 import app.utility.ViewUtil;
 
@@ -22,7 +23,7 @@ public class Battle {
 		for (int i = 0; i < num; i++) {
 			r = Util.random.nextInt(MonsterTable.monsterName.length);
 			monsters[i] = new Monster(MonsterTable.monsterName[r], MonsterTable.monsterStatus[r][0],
-					MonsterTable.monsterStatus[r][1], MonsterTable.monsterStatus[r][2]);
+					MonsterTable.monsterStatus[r][1], MonsterTable.monsterStatus[r][2],MonsterTable.monsterStatus[r][3]);
 		}
 		return monsters;
 	}
@@ -117,5 +118,41 @@ public class Battle {
 			ViewUtil.wait(1);
 		}
 		ViewUtil.scrollSlow(2);
+	}
+	
+	public static int totalExp(Monster[] monsters) {
+		int exp = 0;
+		for(Monster m : monsters) {
+			exp += m.exp;
+		}
+		return exp;
+	}
+	
+	public static void addExp(Hero[] heros, int exp) {
+		for (Hero h : heros) {
+			h.exp += exp;
+			System.out.println(h.name + "は" + exp + "の経験値を獲得しました！");
+		}
+	}
+	
+	//　ヒーローの配列を受け取り、レベルアップの条件を満たしていたらステータステーブルを参照してレベルアップを行う
+	public static void LevelUp(Hero[] heros) {
+		for (Hero hero : heros) {
+			if (hero.debugMode) {
+				System.out.println("デバッグモードの為" + hero.name + "のレベルアップ処理をスキップします");
+				continue;
+			}
+			if (hero.isLevelUp()) {
+				hero.level += 1;
+				hero.hp = heroStatusTable.heroStatusMaster[0][hero.level - 1][0];
+				hero.maxHp = heroStatusTable.heroStatusMaster[0][hero.level - 1][0];
+				hero.mp = heroStatusTable.heroStatusMaster[0][hero.level - 1][1];
+				hero.atk = heroStatusTable.heroStatusMaster[0][hero.level - 1][2];
+				hero.def = heroStatusTable.heroStatusMaster[0][hero.level - 1][3];
+				hero.nextExp = heroStatusTable.heroStatusMaster[0][hero.level - 1][4];
+
+				System.out.println(hero.name + "は Lv." + hero.level + "にレベルアップしました！");
+			}
+		}
 	}
 }

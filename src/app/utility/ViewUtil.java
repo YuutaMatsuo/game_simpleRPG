@@ -1,5 +1,7 @@
 package app.utility;
 
+import app.asset.character.Hero;
+
 /**
  * 表示に関する処理をまとめたクラス
  * インスタンスを持たないstaticクラス
@@ -59,5 +61,14 @@ public class ViewUtil {
 			Thread.sleep(i * 1000);
 		} catch (InterruptedException e) {
 		}
+	}
+	
+	public static void battleMenu(Hero[] heros) {
+		System.out.println("=========================================");
+		System.out.println("1.たたかう       Lv." + heros[0].level + " " + heros[0].name + "   HP:" + heros[0].hp + "  MP:" + heros[0].mp);
+		System.out.println("2.ぼうぎょ       Lv." + heros[1].level + " " + heros[1].name + "   HP:" + heros[1].hp + "  MP:" + heros[1].mp);
+		System.out.println("3.逃げる      Lv." + heros[2].level + " " + heros[2].name + "  HP:" + heros[2].hp + "   MP:" + heros[2].mp);
+		System.out.println("=========================================");
+		System.out.print("\n>>");
 	}
 }
