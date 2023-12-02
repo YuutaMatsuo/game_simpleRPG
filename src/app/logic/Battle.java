@@ -1,11 +1,10 @@
-package app.model;
+package app.logic;
 
 import app.asset.character.Hero;
 import app.asset.character.Monster;
-import app.table.MonsterTable;
+import app.table.MonsterStatusTable;
 import app.table.heroStatusTable;
-import app.utility.Util;
-import app.utility.ViewUtil;
+import app.view.View;
 
 /*
  * バトルに関する共有したい処理をまとめたクラス
@@ -16,14 +15,22 @@ public class Battle {
 
 	// 引数として受け取った数のモンスターのインスタンスを作成し
 	// 配列に格納して戻り値として返す
-	public static Monster[] popMonster(int num) {
+	public static Monster[] popMonster(int num, int level) {
 		Monster[] monsters = new Monster[num];
 		Monster monster;
 		int r;
+		int s;
 		for (int i = 0; i < num; i++) {
-			r = Util.random.nextInt(MonsterTable.monsterName.length);
-			monsters[i] = new Monster(MonsterTable.monsterName[r], MonsterTable.monsterStatus[r][0],
-					MonsterTable.monsterStatus[r][1], MonsterTable.monsterStatus[r][2],MonsterTable.monsterStatus[r][3]);
+			r = Util.random.nextInt(MonsterStatusTable.monsterName.length);
+			do {
+				s = Util.random.nextInt(level -2, level + 2);
+			} while (s < 0);
+			// モンスターテーブルを参照してランダムに1体モンスターのインスタンスを生成し配列 i 番目に格納
+			monsters[i] = new Monster(MonsterStatusTable.monsterName[r],
+					MonsterStatusTable.monsterStatusMaster[r][s][0], MonsterStatusTable.monsterStatusMaster[r][s][1],
+					MonsterStatusTable.monsterStatusMaster[r][s][2], MonsterStatusTable.monsterStatusMaster[r][s][3],
+					MonsterStatusTable.monsterStatusMaster[r][s][4]);
+			monsters[i].level = s;
 		}
 		return monsters;
 	}
@@ -44,14 +51,14 @@ public class Battle {
 				r = Util.random.nextInt(m.length);
 			} while (m[r].isAlive() == false);
 			hero.attack(m[r]);
-			ViewUtil.scrollSlow(2);
+			View.scrollSlow(2);
 		}
 	}
 
 	// 引数として受け取ったモンスターとヒーローの配列を元に
 	// ランダムに攻撃を行う
 	// モンスターからヒーロへ攻撃
-	public static void attak(Monster[] m, Hero[] h) {
+	public static void attak(Monster[] m, Hero[] h, boolean def) {
 		int r;
 		for (Monster monster : m) {
 			if (monster.isAlive() == false) {
@@ -63,8 +70,8 @@ public class Battle {
 			do {
 				r = Util.random.nextInt(h.length);
 			} while (h[r].isAlive() == false);
-			monster.attack(h[r]);
-			ViewUtil.scrollSlow(2);
+			monster.attack(h[r], def);
+			View.scrollSlow(2);
 		}
 	}
 
@@ -109,44 +116,50 @@ public class Battle {
 			System.out.println(hero.name + "HP:" + hero.hp);
 		}
 	}
-	
+
 	// モンスターの配列を受け取り１体ずつ表示
 	public static void showMonster(Monster[] monsters) {
 		for (Monster m : monsters) {
-			System.out.println(m.name + "が現れた!");
+			System.out.println("Lv." + (m.level + 1) + " "  + m.name + "が現れた!");
 			m.showStatus();
-			ViewUtil.wait(1);
+			View.wait(1);
 		}
-		ViewUtil.scrollSlow(2);
+		View.scrollSlow(2);
 	}
-	
-	// モンスターの合計経験値を計算し戻り値として返す
-		public static int totalGold(Monster[] monsters) {
-			int gold = 0;
-			for(Monster m : monsters) {
-				exp += m.exp;
-			}
-			return exp;
+
+	// モンスターの合計排出ゴールドを計算し戻り値として返す
+	public static int totalGold(Monster[] monsters) {
+		int gold = 0;
+		for (Monster m : monsters) {
+			gold += m.gold;
 		}
-	
+		return gold;
+	}
+
 	// モンスターの合計経験値を計算し戻り値として返す
 	public static int totalExp(Monster[] monsters) {
 		int exp = 0;
-		for(Monster m : monsters) {
+		for (Monster m : monsters) {
 			exp += m.exp;
 		}
 		return exp;
 	}
-	
-	//　ヒーローの経験値を増やすメソッド
+
+	// ヒーローの経験値を増やすメソッド
 	public static void addExp(Hero[] heros, int exp) {
 		for (Hero h : heros) {
 			h.exp += exp;
 			System.out.println(h.name + "は" + exp + "の経験値を獲得しました！");
 		}
 	}
-	
-	//　ヒーローの配列を受け取り、レベルアップの条件を満たしていたらステータステーブルを参照してレベルアップを行う
+
+	// ヒーローのゴールドを増やすメソッド
+	public static void addGold(Hero[] heros, int gold) {
+		heros[0].gold += gold;
+		System.out.println(heros[0].name + "は" + gold + "のゴールドを入手しました！");
+	}
+
+	// ヒーローの配列を受け取り、レベルアップの条件を満たしていたらステータステーブルを参照してレベルアップを行う
 	public static void LevelUp(Hero[] heros) {
 		for (Hero hero : heros) {
 			if (hero.debugMode) {
@@ -155,12 +168,12 @@ public class Battle {
 			}
 			if (hero.isLevelUp()) {
 				hero.level += 1;
-				hero.hp = heroStatusTable.heroStatusMaster[0][hero.level - 1][0];
-				hero.maxHp = heroStatusTable.heroStatusMaster[0][hero.level - 1][0];
-				hero.mp = heroStatusTable.heroStatusMaster[0][hero.level - 1][1];
-				hero.atk = heroStatusTable.heroStatusMaster[0][hero.level - 1][2];
-				hero.def = heroStatusTable.heroStatusMaster[0][hero.level - 1][3];
-				hero.nextExp = heroStatusTable.heroStatusMaster[0][hero.level - 1][4];
+				hero.hp = heroStatusTable.heroStatusMaster[hero.job][hero.level - 1][0];
+				hero.maxHp = heroStatusTable.heroStatusMaster[hero.job][hero.level - 1][0];
+				hero.mp = heroStatusTable.heroStatusMaster[hero.job][hero.level - 1][1];
+				hero.atk = heroStatusTable.heroStatusMaster[hero.job][hero.level - 1][2];
+				hero.def = heroStatusTable.heroStatusMaster[hero.job][hero.level - 1][3];
+				hero.nextExp = heroStatusTable.heroStatusMaster[hero.job][hero.level - 1][4];
 
 				System.out.println(hero.name + "は Lv." + hero.level + "にレベルアップしました！");
 			}
