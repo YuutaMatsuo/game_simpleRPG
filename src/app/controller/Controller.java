@@ -169,7 +169,8 @@ public class Controller {
 
 			if ("4".equals(nextAction)) {
 				System.out.println("メインメニューへ戻ります");
-				System.exit(0);
+				View.load();
+				this.start();
 			}
 
 			switch (nextAction) {

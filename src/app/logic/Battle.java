@@ -23,7 +23,7 @@ public class Battle {
 		for (int i = 0; i < num; i++) {
 			r = Util.random.nextInt(MonsterStatusTable.monsterName.length);
 			do {
-				s = Util.random.nextInt(level -2, level + 2);
+				s = Util.random.nextInt(level -2, level);
 			} while (s < 0);
 			// モンスターテーブルを参照してランダムに1体モンスターのインスタンスを生成し配列 i 番目に格納
 			monsters[i] = new Monster(MonsterStatusTable.monsterName[r],
