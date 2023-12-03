@@ -58,9 +58,9 @@ public class Controller {
 
 		System.out.println("ようこそ" + this.hero.name + "さん");
 		View.wait(1);
-		System.out.println("あなたのステータスは以下の通りです");
-		this.hero.showStatus();
-		View.wait(1);
+		System.out.println("");
+		View.scroll(6);
+		View.load();
 	}
 
 	// デバッグモード
@@ -157,7 +157,8 @@ public class Controller {
 	// トップメニュー
 	public void menu() {
 		while (true) {
-			View.scrollSlow(4);
+			View.showAllStatus(heros);
+			View.scroll(2);
 			System.out.println("実行するメニューを選択してください");
 			System.out.println("1.冒険に出る");
 			System.out.println("2.ダンジョンに挑戦する");
