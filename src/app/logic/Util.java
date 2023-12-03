@@ -45,4 +45,11 @@ public class Util {
 			hero.debugMode = true;
 		}
 	}
+	
+	//　勇者の配列を受け取りMaxHP分回復を行う
+	public static void allHeal(Hero[] heros) {
+		for(Hero h : heros) {
+			h.hp = h.maxHp;
+		}
+	}
 }

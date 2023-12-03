@@ -58,7 +58,7 @@ public class Controller {
 
 		System.out.println("ようこそ" + this.hero.name + "さん");
 		View.wait(1);
-		System.out.println("");
+		System.out.println("冒険の仲間として戦士と魔法使いも旅に同行します！\n３人で色々なモンスターと戦ってみましょう！");
 		View.scroll(6);
 		View.load();
 	}

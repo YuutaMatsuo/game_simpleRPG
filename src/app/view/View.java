@@ -66,14 +66,14 @@ public class View {
 	
 	public static void load() {
 		System.out.println("Now Loading ...");
-		for(int i = 0; i < 30; i++) {
+		for(int i = 0; i < 20; i++) {
 			System.out.print("■");
 			try {
 				Thread.sleep(300);
 			} catch (InterruptedException e) {
 			}
 		}
-		for(int i = 0; i < 60; i++) {
+		for(int i = 0; i < 50; i++) {
 			System.out.print("■");
 			try {
 				Thread.sleep(50);

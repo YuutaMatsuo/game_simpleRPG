@@ -11,14 +11,14 @@ public class MonsterStatusTable {
 	// 各モンスターのベースとなるステータスを定義
 	public static int[][] monsterStatusBase = {
 			{ 300, 220 , 100, 180, 1000}, // スライム HP atk def exp gold
-			{ 140, 400 , 300, 220, 1000}, // はぐれメタル HP atk def exp gold
+			{ 140, 400 , 240, 220, 1000}, // はぐれメタル HP atk def exp gold
 			{ 400, 380 , 220, 350, 1000}, // キラーマシン HP atk def exp gold
 			{ 350, 320 , 180, 180, 1000}, // スライムナイト HP atk def exp gold
 			{ 430, 390 , 240, 180, 1000}, // キラーパンサー HP atk def exp gold
 			{ 280, 420 , 150, 180, 1000}, // サボテンダー HP atk def exp gold
-			{ 330, 280 , 400, 180, 1000}, // トンベリ HP atk def exp gold
-			{ 360, 340 , 350, 180, 1000}, // チョコボ HP atk def exp gold
-			{ 550, 360 , 250, 180, 1000}, // モルボル HP atk def exp gold
+			{ 330, 280 , 300, 180, 1000}, // トンベリ HP atk def exp gold
+			{ 360, 340 , 250, 180, 1000}, // チョコボ HP atk def exp gold
+			{ 550, 360 , 150, 180, 1000}, // モルボル HP atk def exp gold
 			{ 200, 250 , 180, 180, 1000} // ボム HP atk def exp gold
 	};
 	
