@@ -17,6 +17,8 @@ public class Inn {
 		
 		while(true) {
 		System.out.println("宿屋で一休みすることでHPやMPが全回復します\n\n\n一休みしますか？ １泊 500G");
+		System.out.println("現在の所持金:" + heros[0].gold + "G");
+		View.scroll(4);
 		System.out.println("1.ひと休みする");
 		System.out.println("2.やっぱりやめる");
 		System.out.print(">>");
