@@ -5,7 +5,6 @@ import java.util.Scanner;
 import app.asset.character.Hero;
 import app.logic.Util;
 import app.model.Debug;
-import app.model.Dungeon;
 import app.model.Field;
 import app.model.Inn;
 import app.view.View;
@@ -14,10 +13,8 @@ import app.view.View;
  * メニュー選択や進行を行うクラス
  * 勇者インスタンスの生成もここで行う
  */
-
 public class Controller {
 	public Field field;
-	public Dungeon dungeon = new Dungeon();
 	public Inn inn = new Inn();
 	public Debug debug;
 
@@ -50,7 +47,6 @@ public class Controller {
 
 		// 各インスタンスへ勇者のインスタンスを代入
 		field.heros = this.heros;
-		dungeon.heros = this.heros;
 		inn.heros = this.heros;
 		debug.heros = this.heros;
 
@@ -76,13 +72,11 @@ public class Controller {
 		
 		// 各インスタンスへ勇者のインスタンスを代入
 		field.heros = this.heros;
-		dungeon.heros = this.heros;
 		inn.heros = this.heros;
 		debug.heros = this.heros;
 		
 		//デバッグインスタンスへ各インスタンスを代入
 		debug.field = this.field;
-		debug.dungeon = this.dungeon;
 		debug.inn = this.inn;
 
 
@@ -161,14 +155,13 @@ public class Controller {
 			View.scroll(2);
 			System.out.println("実行するメニューを選択してください");
 			System.out.println("1.冒険に出る");
-			System.out.println("2.ダンジョンに挑戦する");
-			System.out.println("3.宿屋で休む");
-			System.out.println("4.メインメニューへ戻る");
+			System.out.println("2.宿屋で休む");
+			System.out.println("3.メインメニューへ戻る");
 			System.out.print(">>");
 
 			String nextAction = new Scanner(System.in).nextLine();
 
-			if ("4".equals(nextAction)) {
+			if ("3".equals(nextAction)) {
 				System.out.println("メインメニューへ戻ります");
 				View.load();
 				this.start();
@@ -179,9 +172,6 @@ public class Controller {
 				field.start();
 				break;
 			case "2":
-				dungeon.start();
-				break;
-			case "3":
 				inn.start();
 				break;
 			}

@@ -10,7 +10,6 @@ import app.view.View;
 public class Debug {
 	public Controller controller;
 	public Field field;
-	public Dungeon dungeon;
 	public Inn inn;
 
 	public Hero[] heros;
@@ -59,7 +58,7 @@ public class Debug {
 			}
 		}
 	}
-
+	//デバッグ戦闘を行う回数を設定
 	public int debugContinue() {
 		System.out.println("戦闘回数を入力してください");
 		System.out.print(">>");

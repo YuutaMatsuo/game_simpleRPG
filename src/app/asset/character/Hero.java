@@ -1,8 +1,6 @@
 package app.asset.character;
 
-import app.asset.weapon.Sword;
 import app.table.heroStatusTable;
-
 /*
  * ヒーローインスタンスの雛形となるクラス
  * ステータスとして名前、HP、MP、ATKを持つ
@@ -21,9 +19,8 @@ public class Hero {
 	public int nextExp;
 	public static int gold;
 	public boolean debugMode = false;
-
-	Sword sword;
-
+	
+	//コンストラクタ
 	public Hero(String name, int job, int level, int hp, int maxHp, int mp, int atk, int def, int exp) {
 		this.name = name;
 		this.job = job;
@@ -49,7 +46,7 @@ public class Hero {
 		this.nextExp = heroStatusTable.heroStatusMaster[job][1][4];
 		this.gold = 500;
 	}
-
+	//ステータスを表示する
 	public void showStatus() {
 		System.out.println("=====================");
 		System.out.println("名前: " + this.name);
@@ -59,7 +56,7 @@ public class Hero {
 		System.out.println("DEF: " + this.def);
 		System.out.println("=====================");
 	}
-
+	//モンスターへの攻撃 計算式は ヒーローの攻撃力の50% - モンスターの防御力の25% で計算
 	public void attack(Monster m) {
 		int damage = (int) (this.atk * 0.5) - (int) (m.def * 0.25);
 		if (damage < 0) {
@@ -69,7 +66,7 @@ public class Hero {
 		System.out.println(m.name + "に" + damage + "ポイントのダメージを与えた！");
 		m.hp -= damage;
 	}
-
+	//　経験値が次のレベルアップに必要な量を超えているかチェックする
 	public boolean isLevelUp() {
 		if (this.level == heroStatusTable.MAX_LEVEL) {
 			System.out.println(this.name + "はレベルの上限に達した為、経験値を受け取ることが出来ませんでした。");
@@ -77,7 +74,7 @@ public class Hero {
 		}
 		return exp > nextExp;
 	}
-
+	// ヒーローが生きているか確認する 生存していたらTrueが戻り地として返される
 	public boolean isAlive() {
 		boolean alive = this.hp > 0;
 		if(!alive) {
@@ -85,7 +82,7 @@ public class Hero {
 		}
 		return alive;
 	}
-
+	// デバッグモードかチェックする 
 	public boolean isDebugMode() {
 		return this.debugMode;
 	}
