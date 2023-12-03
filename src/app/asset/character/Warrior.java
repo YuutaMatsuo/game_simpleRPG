@@ -3,14 +3,8 @@ package app.asset.character;
 import app.asset.weapon.Sword;
 import app.table.heroStatusTable;
 
-/*
- * ヒーローインスタンスの雛形となるクラス
- * ステータスとして名前、HP、MP、ATKを持つ
- */
-
-public class Hero {
+public class Warrior {
 	public String name;
-	public int job; // 0.勇者 1.戦士 2.魔法使い
 	public int level;
 	public int hp;
 	public int maxHp;
@@ -19,14 +13,13 @@ public class Hero {
 	public int def;
 	public int exp;
 	public int nextExp;
-	public static int gold;
+	static int gold;
 	public boolean debugMode = false;
 
 	Sword sword;
 
-	public Hero(String name, int job, int level, int hp, int maxHp, int mp, int atk, int def, int exp) {
+	public Warrior(String name, int level, int hp, int maxHp, int mp, int atk, int def, int exp) {
 		this.name = name;
-		this.job = job;
 		this.level = level;
 		this.hp = hp;
 		this.maxHp = maxHp;
@@ -37,17 +30,8 @@ public class Hero {
 		this.gold = 500;
 	}
 
-	public Hero(String name, int job) {
-		this.name = name;
-		this.job = job;
-		this.level = 1;
-		this.hp = heroStatusTable.heroStatusMaster[job][1][0];
-		this.maxHp = heroStatusTable.heroStatusMaster[job][1][0];
-		this.mp = heroStatusTable.heroStatusMaster[job][1][1];
-		this.atk = heroStatusTable.heroStatusMaster[job][1][2];
-		this.def = heroStatusTable.heroStatusMaster[job][1][3];
-		this.nextExp = heroStatusTable.heroStatusMaster[job][1][4];
-		this.gold = 500;
+	public Warrior(String name) {
+		this(name, 1, 100, 100, 10, 10, 10, 0);
 	}
 
 	public void showStatus() {
@@ -61,7 +45,7 @@ public class Hero {
 	}
 
 	public void attack(Monster m) {
-		int damage = (int) (this.atk * 0.5) - (int) (m.def * 0.25);
+		int damage = this.atk - m.def;
 		if (damage < 0) {
 			damage = 0;
 		}
@@ -71,7 +55,7 @@ public class Hero {
 	}
 
 	public boolean isLevelUp() {
-		if (this.level == heroStatusTable.MAX_LEVEL) {
+		if(this.level == heroStatusTable.MAX_LEVEL) {
 			System.out.println(this.name + "はレベルの上限に達した為、経験値を受け取ることが出来ませんでした。");
 			return false;
 		}
@@ -79,15 +63,6 @@ public class Hero {
 	}
 
 	public boolean isAlive() {
-		boolean alive = this.hp > 0;
-		if(!alive) {
-			this.hp = 0;
-		}
-		return alive;
+		return this.hp > 0;
 	}
-
-	public boolean isDebugMode() {
-		return this.debugMode;
-	}
-
 }
