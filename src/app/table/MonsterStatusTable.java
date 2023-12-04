@@ -6,10 +6,10 @@ package app.table;
  */
 
 public class MonsterStatusTable {
-	public static String[] monsterName = { "スライム", "はぐれメタル", "キラーマシン", "スライムナイト", "キラーパンサー",  "サボテンダー", "トンベリ", "チョコボ", "モルボル", "ボム"};
+	public static final String[] monsterName = { "スライム", "はぐれメタル", "キラーマシン", "スライムナイト", "キラーパンサー",  "サボテンダー", "トンベリ", "チョコボ", "モルボル", "ボム"};
 	
 	// 各モンスターのベースとなるステータスを定義
-	public static int[][] monsterStatusBase = {
+	public static final int[][] monsterStatusBase = {
 			{ 300, 220 , 100, 180, 1000}, // スライム HP atk def exp gold
 			{ 140, 400 , 240, 220, 1000}, // はぐれメタル HP atk def exp gold
 			{ 400, 380 , 220, 350, 1000}, // キラーマシン HP atk def exp gold
@@ -27,7 +27,7 @@ public class MonsterStatusTable {
 	
 	//三次元配列 [各モンスター] [モンスターのレベル] [レベルごとのステータス] が格納されたマスターテーブル
 	//モンスター生成時に使用
-	public static int[][][] monsterStatusMaster = {
+	public static final int[][][] monsterStatusMaster = {
 		{	// スライム HP atk def exp gold
 			{(int)(MonsterStatusTable.monsterStatusBase[0][0] * statMagnification[0]), (int)(MonsterStatusTable.monsterStatusBase[0][1] * statMagnification[0]), (int)(MonsterStatusTable.monsterStatusBase[0][2] * statMagnification[0]), (int)(MonsterStatusTable.monsterStatusBase[0][3] * statMagnification[0]), (int)(MonsterStatusTable.monsterStatusBase[0][4] * statMagnification[0])},
 			{(int)(MonsterStatusTable.monsterStatusBase[0][0] * statMagnification[1]), (int)(MonsterStatusTable.monsterStatusBase[0][1] * statMagnification[1]), (int)(MonsterStatusTable.monsterStatusBase[0][2] * statMagnification[1]), (int)(MonsterStatusTable.monsterStatusBase[0][3] * statMagnification[1]), (int)(MonsterStatusTable.monsterStatusBase[0][4] * statMagnification[1])},

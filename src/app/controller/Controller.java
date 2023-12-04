@@ -83,28 +83,25 @@ public class Controller {
 		System.out.println("===デバッグモードに入りました===");
 		View.scroll(2);
 		System.out.println("勇者パーティーの強さを選択してください");
-		System.out.println("1.最強 Lv.100");
-		System.out.println("2.戦闘チェック用 Lv.1");
-		System.out.println("3.戦闘チェック用 Lv.10");
-		System.out.println("4.戦闘チェック用 Lv.20");
-		System.out.println("5.戦闘チェック用 Lv.30");
+		System.out.println("1.戦闘チェック用 Lv.1");
+		System.out.println("2.戦闘チェック用 Lv.10");
+		System.out.println("3.戦闘チェック用 Lv.20");
+		System.out.println("4.戦闘チェック用 Lv.30");
 		System.out.print(">>");
 
 		String nextAction = new Scanner(System.in).nextLine();
 
 		switch (nextAction) {
 		case "1":
-			Util.changeStatus(heros);
-		case "2":
 			Util.changeStatus(heros, 1);
 			break;
-		case "3":
+		case "2":
 			Util.changeStatus(heros, 10);
 			break;
-		case "4":
+		case "3":
 			Util.changeStatus(heros, 20);
 			break;
-		case "5":
+		case "4":
 			Util.changeStatus(heros, 30);
 			break;
 		}

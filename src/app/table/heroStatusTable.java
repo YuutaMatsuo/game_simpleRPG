@@ -21,7 +21,7 @@ public class heroStatusTable {
 	
 	//三次元配列 [勇者、戦士、魔法使い] [ヒーロー毎のレベル] [レベルごとのステータス] が格納されたマスターテーブル
 	//レベルアップ処理で使用
-	public static int[][][] heroStatusMaster = {
+	public static final int[][][] heroStatusMaster = {
 			{	//勇者のステータス	HP/ MP/ ATK/ DEF/ 必要経験値
 				// レベル　１～１０
 				{(int)(heroStatusTable.heroStatusBase[0][0] * statMagnification[0]), (int)(heroStatusTable.heroStatusBase[0][1] * statMagnification[0]), (int)(heroStatusTable.heroStatusBase[0][2] * statMagnification[0]), (int)(heroStatusTable.heroStatusBase[0][3] * statMagnification[0]), (int)(heroStatusTable.heroStatusBase[0][4] * statMagnification[0])}, 	//レベル 1
