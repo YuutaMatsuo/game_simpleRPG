@@ -17,7 +17,5 @@ public class Main {
 		controller.field = field;
 		
         controller.start();
-        
-        //git テストコメント　立石さん用！
 	}
 }
