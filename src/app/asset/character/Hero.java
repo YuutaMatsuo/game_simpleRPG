@@ -1,4 +1,4 @@
-package app.asset.character;
+ package app.asset.character;
 
 import app.table.heroStatusTable;
 /*
