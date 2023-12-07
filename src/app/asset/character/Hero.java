@@ -7,18 +7,18 @@ import app.table.heroStatusTable;
  */
 
 public class Hero {
-	public String name;
-	public int job; // 0.勇者 1.戦士 2.魔法使い
-	public int level;
-	public int hp;
-	public int maxHp;
-	public int mp;
-	public int atk;
-	public int def;
-	public int exp;
-	public int nextExp;
-	public static int gold;
-	public boolean debugMode = false;
+	private String name;
+	private int job; // 0.勇者 1.戦士 2.魔法使い
+	private int level;
+	private int hp;
+	private int maxHp;
+	private int mp;
+	private int atk;
+	private int def;
+	private int exp;
+	private int nextExp;
+	private static int gold;
+	private boolean debugMode = false;
 	
 	//コンストラクタ
 	public Hero(String name, int job, int level, int hp, int maxHp, int mp, int atk, int def, int exp) {

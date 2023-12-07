@@ -6,13 +6,13 @@ package app.asset.character;
  */
 
 public class Monster {
-	public String name;
-	public int hp;
-	public int atk;
-	public int def;
-	public int exp;
-	public int gold;
-	public int level;
+	private String name;
+	private int hp;
+	private int atk;
+	private int def;
+	private int exp;
+	private int gold;
+	private int level;
 
 	// モンスターのインスタンスを生成する際は、MonsterTableを参照して引数を渡す
 	// 必ず４つすべての要素を引数に渡す
