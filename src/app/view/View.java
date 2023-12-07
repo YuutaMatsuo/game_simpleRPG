@@ -9,7 +9,7 @@ import app.table.heroStatusTable;
  */
 
 public class View {
-
+	//	タイトルを表示する
 	public static void showTitle() {
 		System.out.println(
 				"================================================================================================================================");
@@ -63,26 +63,26 @@ public class View {
 		} catch (InterruptedException e) {
 		}
 	}
-	
+	//	ロード画面を表示する
 	public static void load() {
 		System.out.println("Now Loading ...");
 		for(int i = 0; i < 20; i++) {
 			System.out.print("■");
 			try {
-				Thread.sleep(300);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 			}
 		}
 		for(int i = 0; i < 50; i++) {
 			System.out.print("■");
 			try {
-				Thread.sleep(50);
+				Thread.sleep(30);
 			} catch (InterruptedException e) {
 			}
 		}
 		View.scroll(50);
 	}
-
+	// 戦闘メニューを表示
 	public static void battleMenu(Hero[] heros) {
 		System.out.println("=========================================");
 		System.out.println("1.たたかう       Lv." + heros[0].level + " " + heros[0].name + "   HP:" + heros[0].hp + "  MP:"
@@ -144,7 +144,7 @@ public class View {
 		}
 		View.scroll(1);
 	}
-	
+	// フィールドバトル時のメッセージを表示
 	public static void feildMessage() {
 		View.scroll(2);
 		System.out.println("ここではプレイヤーのレベルに応じたモンスターが出現します");

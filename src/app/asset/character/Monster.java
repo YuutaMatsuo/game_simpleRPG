@@ -24,7 +24,7 @@ public class Monster {
 		this.exp = exp;
 		this.gold = gold;
 	}
-
+	// モンスターの攻撃メソッド
 	public void attack(Hero h, boolean def) {
 		int damage = 0;
 		if (!def) {
@@ -44,14 +44,14 @@ public class Monster {
 		h.hp -= damage;
 
 	}
-
+	// モンスターのステータスを表示するメソッド
 	public void showStatus() {
 		System.out.println("HP: " + this.hp);
 		System.out.println("ATK: " + this.atk);
 		System.out.println("DEF: " + this.def);
 		System.out.println();
 	}
-
+	//	モンスターのステータスを表示するメソッド  Name表示あり
 	public void showAllStatus() {
 		System.out.println("Lv." + (this.level + 1) + " " + this.name);
 		System.out.println("HP: " + this.hp);
@@ -59,7 +59,7 @@ public class Monster {
 		System.out.println("DEF: " + this.def);
 		System.out.println();
 	}
-
+	//	モンスターが生きているかチェックするメソッド　生存していればTrueを返す
 	public boolean isAlive() {
 		return this.hp > 0;
 	}
