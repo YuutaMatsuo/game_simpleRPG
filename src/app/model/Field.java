@@ -2,7 +2,7 @@ package app.model;
 
 import java.util.Scanner;
 
-import app.asset.character.Hero;
+import app.asset.character.Human;
 import app.asset.character.Monster;
 import app.controller.Controller;
 import app.logic.Battle;
@@ -12,7 +12,7 @@ import app.view.View;
 public class Field {
 
 	public Controller controller;
-	public Hero[] heros;
+	public Human[] heros;
 
 	// 連続戦闘モード 初期値false デバッグの際に使用
 	public boolean continuousBattleMode = false;

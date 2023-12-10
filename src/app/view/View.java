@@ -1,6 +1,6 @@
 package app.view;
 
-import app.asset.character.Hero;
+import app.asset.character.Human;
 import app.table.MonsterStatusTable;
 import app.table.heroStatusTable;
 
@@ -83,7 +83,7 @@ public class View {
 		View.scroll(50);
 	}
 	// 戦闘メニューを表示
-	public static void battleMenu(Hero[] heros) {
+	public static void battleMenu(Human[] heros) {
 		System.out.println("=========================================");
 		System.out.println("1.たたかう       Lv." + heros[0].level + " " + heros[0].name + "   HP:" + heros[0].hp + "  MP:"
 				+ heros[0].mp);
@@ -96,7 +96,7 @@ public class View {
 	}
 
 	// 引数で渡されたパーティーメンバーのステータスを表示
-	public static void showAllStatus(Hero[] heros) {
+	public static void showAllStatus(Human[] heros) {
 		System.out.println("=========================================");
 		System.out
 				.println("Lv." + heros[0].level + " " + heros[0].name + "   HP:" + heros[0].hp + "  MP:" + heros[0].mp);
