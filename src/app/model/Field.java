@@ -1,23 +1,32 @@
 package app.model;
 
+import java.util.Random;
 import java.util.Scanner;
 
+import app.asset.character.Blackmage;
+import app.asset.character.Brave;
 import app.asset.character.Human;
 import app.asset.character.Monster;
+import app.asset.character.Warrior;
 import app.controller.Controller;
 import app.logic.Battle;
-import app.logic.Util;
 import app.view.View;
 
 public class Field {
 
 	public Controller controller;
 	public Human[] heros;
+	Scanner scanner = new Scanner(System.in);
+	Random random = new Random();
 
 	// 連続戦闘モード 初期値false デバッグの際に使用
 	public boolean continuousBattleMode = false;
 	// 防御モード 戦闘中の防御力上昇
 	public boolean defenceMode = false;
+	
+	public Field() {
+
+	}
 
 	//
 	public void start() {
@@ -36,7 +45,7 @@ public class Field {
 		/*
 		 * popMonsterメソッド 引数として受け取った数に応じたMonster型のインスタンスを生成し、配列に格納したあと戻り値として値を返す
 		 */
-		Monster[] monsters = Battle.popMonster(Util.random.nextInt(1, 5), this.heros[0].level);
+		Monster[] monsters = Battle.createMonster(this.random.nextInt(1, 5), this.heros[0].getLevel());
 		Battle.showMonster(monsters);
 		View.scroll(2);
 		int exp = Battle.totalExp(monsters);
@@ -63,17 +72,27 @@ public class Field {
 
 			switch (nextAction) {
 			case "1":
-				Battle.attak(this.heros, monsters);
-				Battle.attak(monsters, this.heros, defenceMode);
-				Battle.showMonsterHp(monsters);
+				for (Human h : this.heros) {
+					h.attack(monsters);
+				}
+				for (Monster m : monsters) {
+					m.attack(this.heros);
+				}
+				for (Monster m : monsters) {
+					m.showStatus();
+				}
 				View.scroll(2);
 				break;
 			case "2":
-				this.defenceMode = true;
-				Battle.attak(monsters, heros, defenceMode);
-				this.defenceMode = false;
-				Battle.showMonsterHp(monsters);
-				View.scrollSlow(4);
+				for (Human h : this.heros) {
+					h.setDefendMode(true);
+				}
+				for (Monster m : monsters) {
+					m.attack(this.heros);
+				}
+				for (Human h : this.heros) {
+					h.setDefendMode(false);
+				}
 				break;
 			}
 			if (Battle.isAllDead(heros)) {
@@ -87,10 +106,22 @@ public class Field {
 		if (!Battle.isAllDead(heros)) {
 			System.out.println("戦闘終了！");
 			View.scrollSlow(4);
-			Battle.addExp(this.heros, exp);
-			Battle.addGold(this.heros, gold);
+			for (Human h : this.heros) {
+				h.addExp(exp);
+			}
+			for (Human h : this.heros) {
+				h.addGold(gold);
+			}
 			View.scroll(2);
-			Battle.LevelUp(this.heros);
+			for (Human h : this.heros) {
+				if (h instanceof Brave) {
+					((Brave) h).levelUp();
+				} else if (h instanceof Warrior) {
+					((Warrior) h).levelUp();
+				} else if (h instanceof Blackmage) {
+					((Blackmage) h).levelUp();
+				}
+			}
 			View.scroll(4);
 		}
 	}

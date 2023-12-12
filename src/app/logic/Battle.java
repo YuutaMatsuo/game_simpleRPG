@@ -1,5 +1,7 @@
 package app.logic;
 
+import java.util.Random;
+
 import app.asset.character.Character;
 import app.asset.character.Monster;
 import app.table.MonsterStatusTable;
@@ -14,16 +16,17 @@ public class Battle {
 
 	// 引数として受け取った数のモンスターのインスタンスを作成し
 	// 配列に格納して戻り値として返す
-	public static Monster[] popMonster(int num, int level) {
+	public static Monster[] createMonster(int num, int level) {
 		Monster[] monsters = new Monster[num];
 		int random;
 		int lv;
 		for (int i = 0; i < num; i++) {
-			random = Util.random.nextInt(MonsterStatusTable.monsterName.length);
+			random = new Random().nextInt(MonsterStatusTable.monsterName.length);
 			do {
-				lv = Util.random.nextInt(level - 2, level);
+				lv = new Random().nextInt(level - 2, level + 2);
 			} while (lv < 0);
 			// モンスターテーブルを参照してランダムに1体モンスターのインスタンスを生成し配列 i 番目に格納
+			System.out.println(lv);
 			monsters[i] = new Monster(MonsterStatusTable.monsterName[random], lv,
 					MonsterStatusTable.monsterStatusMaster[random][lv][0], MonsterStatusTable.monsterStatusMaster[random][lv][1],
 					MonsterStatusTable.monsterStatusMaster[random][lv][2], MonsterStatusTable.monsterStatusMaster[random][lv][3],

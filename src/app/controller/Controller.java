@@ -40,7 +40,7 @@ public class Controller {
 		System.out.println("勇者の名前を入力してください");
 		System.out.print(">>");
 
-		String name = Util.scanner.nextLine();
+		String name = new Scanner(System.in).nextLine();
 		// ヒーローテーブルを参照して勇者を生成する
 		this.brave = new Brave(name, 0);
 		this.heros[0] = this.brave;

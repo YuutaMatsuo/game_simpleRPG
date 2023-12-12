@@ -63,17 +63,18 @@ public class View {
 		} catch (InterruptedException e) {
 		}
 	}
+
 	//	ロード画面を表示する
 	public static void load() {
 		System.out.println("Now Loading ...");
-		for(int i = 0; i < 20; i++) {
+		for (int i = 0; i < 20; i++) {
 			System.out.print("■");
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
 			}
 		}
-		for(int i = 0; i < 50; i++) {
+		for (int i = 0; i < 50; i++) {
 			System.out.print("■");
 			try {
 				Thread.sleep(30);
@@ -82,15 +83,19 @@ public class View {
 		}
 		View.scroll(50);
 	}
+
 	// 戦闘メニューを表示
 	public static void battleMenu(Human[] heros) {
 		System.out.println("=========================================");
-		System.out.println("1.たたかう       Lv." + heros[0].level + " " + heros[0].name + "   HP:" + heros[0].hp + "  MP:"
-				+ heros[0].mp);
-		System.out.println("2.ぼうぎょ       Lv." + heros[1].level + " " + heros[1].name + "   HP:" + heros[1].hp + "  MP:"
-				+ heros[1].mp);
-		System.out.println("3.逃げる      Lv." + heros[2].level + " " + heros[2].name + "  HP:" + heros[2].hp + "   MP:"
-				+ heros[2].mp);
+		System.out.println("1.たたかう       Lv." + (heros[0].getLevel() + 1) + " " + heros[0].getName() + "   HP:"
+				+ heros[0].getHp() + "  MP:"
+				+ heros[0].getMp());
+		System.out.println("2.ぼうぎょ       Lv." + (heros[1].getLevel() + 1) + " " + heros[1].getName() + "   HP:"
+				+ heros[1].getHp() + "  MP:"
+				+ heros[1].getMp());
+		System.out.println("3.逃げる      Lv." + (heros[2].getLevel() + 1) + " " + heros[2].getName() + "  HP:"
+				+ heros[2].getHp() + "   MP:"
+				+ heros[2].getMp());
 		System.out.println("=========================================");
 		System.out.print("\n>>");
 	}
@@ -99,11 +104,14 @@ public class View {
 	public static void showAllStatus(Human[] heros) {
 		System.out.println("=========================================");
 		System.out
-				.println("Lv." + heros[0].level + " " + heros[0].name + "   HP:" + heros[0].hp + "  MP:" + heros[0].mp);
+				.println("Lv." + (heros[0].getLevel() + 1) + " " + heros[0].getName() + "   HP:" + heros[0].getHp()
+						+ "  MP:" + heros[0].getMp());
 		System.out
-				.println("Lv." + heros[1].level + " " + heros[1].name + "   HP:" + heros[1].hp + "  MP:" + heros[1].mp);
+				.println("Lv." + (heros[1].getLevel() + 1) + " " + heros[1].getName() + "   HP:" + heros[1].getHp()
+						+ "  MP:" + heros[1].getMp());
 		System.out
-				.println("Lv." + heros[2].level + " " + heros[2].name + "  HP:" + heros[2].hp + "   MP:" + heros[2].mp);
+				.println("Lv." + (heros[2].getLevel() + 1) + " " + heros[2].getName() + "  HP:" + heros[2].getHp()
+						+ "   MP:" + heros[2].getMp());
 		System.out.println("=========================================");
 	}
 
@@ -125,11 +133,12 @@ public class View {
 			View.scroll(1);
 		}
 		View.scroll(1);
-		
+
 		int lv = 1;
 		int name = 0;
 		for (int[][] num : MonsterStatusTable.monsterStatusMaster) {
-			System.out.println("各レベルごとの" + MonsterStatusTable.monsterName[name] + "のステータス ** HP/ MP/ ATK/ DEF/ モンスターの排出経験値 **");
+			System.out.println(
+					"各レベルごとの" + MonsterStatusTable.monsterName[name] + "のステータス ** HP/ MP/ ATK/ DEF/ モンスターの排出経験値 **");
 			for (int[] num1 : num) {
 				System.out.print("レベル" + lv + " ");
 				for (int num2 : num1) {
@@ -144,6 +153,7 @@ public class View {
 		}
 		View.scroll(1);
 	}
+
 	// フィールドバトル時のメッセージを表示
 	public static void feildMessage() {
 		View.scroll(2);

@@ -18,7 +18,7 @@ public class Warrior extends Human {
 	}
 
 	// レベルアップ処理
-	public void LevelUp() {
+	public void levelUp() {
 		if (super.isDebugMode()) {
 			System.out.println("デバッグモードの為" + super.getName() + "のレベルアップ処理をスキップします");
 		} else if (super.isLevelUp()) {

@@ -13,6 +13,7 @@ public abstract class Human extends Character {
 	private int nextExp;
 	private static int gold;
 	private boolean debugMode;
+	private boolean defendMode;
 
 	// コンストラクタ
 	public Human(String name, int level, int hp, int maxHp, int mp, int atk, int def, int exp) {
@@ -21,12 +22,21 @@ public abstract class Human extends Character {
 		this.nextExp = exp;
 		this.gold = 500;
 		this.debugMode = true;
+		this.defendMode = false;
 	}
 
 	// 攻撃処理 オーバーライド
-	protected void attack(Character[] chara) {
+	public void attack(Character[] chara) {
 		battleMessage();
 		super.attack(chara);
+	}
+	
+	// 防御処理 オーバーライド
+	public void defence(int damage) {
+		if (this.defendMode) {
+			damage = (int) (damage * 0.75);
+		}
+		super.defence(damage);
 	}
 
 	// 戦闘中のメッセージ 防御時
@@ -61,7 +71,7 @@ public abstract class Human extends Character {
 	}
 
 	// レベルアップ処理
-	public abstract void LevelUp();
+	public abstract void levelUp();
 
 	// デバッグモードかチェックする
 	public boolean isDebugMode() {
@@ -74,5 +84,9 @@ public abstract class Human extends Character {
 
 	protected void setNextExp(int nextExp) {
 		this.nextExp = nextExp;
+	}
+
+	public void setDefendMode(boolean defendMode) {
+		this.defendMode = defendMode;
 	}
 }

@@ -1,8 +1,5 @@
 package app.logic;
 
-import java.util.Random;
-import java.util.Scanner;
-
 import app.asset.character.Human;
 import app.table.heroStatusTable;
 
@@ -12,8 +9,6 @@ import app.table.heroStatusTable;
  */
 
 public class Util {
-	public static Scanner scanner = new Scanner(System.in);
-	public static Random random = new Random();
 
 	// 勇者のレベルを引数で受け取った値に変更
 	public static void changeStatus(Human[] heros, int level) {

@@ -94,59 +94,43 @@ public abstract class Character {
 		System.out.println("HP: " + this.hp);
 	}
 
-	/**
-	 * @return name
-	 */
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * @return level
-	 */
 	public int getLevel() {
 		return level;
 	}
 
-	/**
-	 * @param name セットする name
-	 */
 	protected void setName(String name) {
 		this.name = name;
 	}
 
-	/**
-	 * @param level セットする level
-	 */
 	protected void setLevel(int level) {
 		this.level = level;
 	}
 
-	/**
-	 * @param hp セットする hp
-	 */
 	protected void setHp(int hp) {
 		this.hp = hp;
 	}
 
-	/**
-	 * @param mp セットする mp
-	 */
 	protected void setMp(int mp) {
 		this.mp = mp;
 	}
 
-	/**
-	 * @param atk セットする atk
-	 */
 	protected void setAtk(int atk) {
 		this.atk = atk;
 	}
 
-	/**
-	 * @param def セットする def
-	 */
 	protected void setDef(int def) {
 		this.def = def;
+	}
+
+	public int getHp() {
+		return hp;
+	}
+
+	public int getMp() {
+		return mp;
 	}
 }
