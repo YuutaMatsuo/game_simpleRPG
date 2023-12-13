@@ -41,6 +41,7 @@ public abstract class Character {
 			do {
 				random = new Random().nextInt(chara.length);
 			} while (chara[random].isAlive() == false);
+			this.battleMessage();
 			chara[random].defence(damage);
 			View.scrollSlow(2);
 			break;
@@ -60,12 +61,12 @@ public abstract class Character {
 	}
 
 	// 戦闘中のメッセージ 攻撃時
-	public String battleMessage() {
-		return this.name + "のこうげき！";
+	public void battleMessage() {
+		System.out.println(this.name + "のこうげき！");
 	}
 
 	// 戦闘中のメッセージ 防御時
-	protected abstract String battleMessage(int damage);
+	protected abstract void battleMessage(int damage);
 
 	// 死んでしまった際のメッセージ
 	public abstract String resultMessage();

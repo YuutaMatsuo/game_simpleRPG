@@ -48,6 +48,10 @@ public class Field {
 		Monster[] monsters = Battle.createMonster(this.random.nextInt(1, 5), this.heros[0].getLevel());
 		Battle.showMonster(monsters);
 		View.scroll(2);
+		for(Monster m : monsters) {
+			m.showStatus();
+			View.scroll(1);
+		}
 		int exp = Battle.totalExp(monsters);
 		int gold = Battle.totalGold(monsters);
 		String nextAction;

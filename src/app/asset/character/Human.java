@@ -40,8 +40,8 @@ public abstract class Human extends Character {
 	}
 
 	// 戦闘中のメッセージ 防御時
-	public String battleMessage(int damage) {
-		return super.getName() + "は" + damage + "のダメージを受けた";
+	public void battleMessage(int damage) {
+		System.out.println(super.getName() + "は" + damage + "のダメージを受けた");
 	}
 
 	// 死んでしまった際のメッセージ

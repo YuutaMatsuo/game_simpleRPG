@@ -26,7 +26,6 @@ public class Battle {
 				lv = new Random().nextInt(level - 2, level + 2);
 			} while (lv < 0);
 			// モンスターテーブルを参照してランダムに1体モンスターのインスタンスを生成し配列 i 番目に格納
-			System.out.println(lv);
 			monsters[i] = new Monster(MonsterStatusTable.monsterName[random], lv,
 					MonsterStatusTable.monsterStatusMaster[random][lv][0], MonsterStatusTable.monsterStatusMaster[random][lv][1],
 					MonsterStatusTable.monsterStatusMaster[random][lv][2], MonsterStatusTable.monsterStatusMaster[random][lv][3],
@@ -50,7 +49,6 @@ public class Battle {
 	public static void showMonster(Monster[] monsters) {
 		for (Monster m : monsters) {
 			System.out.println("Lv." + (m.getLevel() + 1) + " " + m.getName() + "が現れた!");
-			m.showStatus();
 			View.wait(1);
 		}
 		View.scrollSlow(2);
