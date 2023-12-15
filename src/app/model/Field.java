@@ -23,7 +23,7 @@ public class Field {
 	public boolean continuousBattleMode = false;
 	// 防御モード 戦闘中の防御力上昇
 	public boolean defenceMode = false;
-	
+
 	public Field() {
 
 	}
@@ -48,10 +48,7 @@ public class Field {
 		Monster[] monsters = Battle.createMonster(this.random.nextInt(1, 5), this.heros[0].getLevel());
 		Battle.showMonster(monsters);
 		View.scroll(2);
-		for(Monster m : monsters) {
-			m.showStatus();
-			View.scroll(1);
-		}
+		View.showAllStatus(monsters);
 		int exp = Battle.totalExp(monsters);
 		int gold = Battle.totalGold(monsters);
 		String nextAction;
@@ -82,9 +79,7 @@ public class Field {
 				for (Monster m : monsters) {
 					m.attack(this.heros);
 				}
-				for (Monster m : monsters) {
-					m.showStatus();
-				}
+				View.showAllStatus(monsters);
 				View.scroll(2);
 				break;
 			case "2":

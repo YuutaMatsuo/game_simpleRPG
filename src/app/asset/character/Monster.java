@@ -18,7 +18,6 @@ public class Monster extends Character {
 	
 	// 攻撃処理 オーバーライド
 	public void attack(Character[] chara) {
-		battleMessage();
 		super.attack(chara);
 	}
 

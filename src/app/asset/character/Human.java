@@ -27,7 +27,6 @@ public abstract class Human extends Character {
 
 	// 攻撃処理 オーバーライド
 	public void attack(Character[] chara) {
-		battleMessage();
 		super.attack(chara);
 	}
 	
@@ -40,8 +39,8 @@ public abstract class Human extends Character {
 	}
 
 	// 戦闘中のメッセージ 防御時
-	public void battleMessage(int damage) {
-		System.out.println(super.getName() + "は" + damage + "のダメージを受けた");
+	public String battleMessage(int damage) {
+		return super.getName() + "は" + damage + "のダメージを受けた";
 	}
 
 	// 死んでしまった際のメッセージ

@@ -66,7 +66,7 @@ public abstract class Character {
 	}
 
 	// 戦闘中のメッセージ 防御時
-	protected abstract void battleMessage(int damage);
+	protected abstract String battleMessage(int damage);
 
 	// 死んでしまった際のメッセージ
 	public abstract String resultMessage();
@@ -80,13 +80,9 @@ public abstract class Character {
 		return alive;
 	}
 
-	// ステータスを表示
-	public void showStatus() {
-		System.out.println("Lv." + (this.level + 1) + " " + this.name);
-		System.out.println("HP: " + this.hp);
-		System.out.println("MP: " + this.mp);
-		System.out.println("ATK: " + this.atk);
-		System.out.println("DEF: " + this.def);
+	// 自身のインスタンスのステータスを表示 オーバーライド
+	public String toString() {
+		return "Lv." + (this.level + 1) + " " + this.name + "\nHP: " + this.hp + "\nMP: " + this.mp;
 	}
 
 	// 残りHPを表示
@@ -94,6 +90,8 @@ public abstract class Character {
 		System.out.println("Lv." + (this.level + 1) + " " + this.name);
 		System.out.println("HP: " + this.hp);
 	}
+	
+	// 自身のインスタンス
 
 	public String getName() {
 		return name;

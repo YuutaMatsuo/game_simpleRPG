@@ -9,7 +9,7 @@ import app.table.heroStatusTable;
  */
 
 public class View {
-	//	タイトルを表示する
+	// タイトルを表示する
 	public static void showTitle() {
 		System.out.println(
 				"================================================================================================================================");
@@ -64,7 +64,7 @@ public class View {
 		}
 	}
 
-	//	ロード画面を表示する
+	// ロード画面を表示する
 	public static void load() {
 		System.out.println("Now Loading ...");
 		for (int i = 0; i < 20; i++) {
@@ -88,36 +88,25 @@ public class View {
 	public static void battleMenu(Human[] heros) {
 		System.out.println("=========================================");
 		System.out.println("1.たたかう       Lv." + (heros[0].getLevel() + 1) + " " + heros[0].getName() + "   HP:"
-				+ heros[0].getHp() + "  MP:"
-				+ heros[0].getMp());
+				+ heros[0].getHp() + "  MP:" + heros[0].getMp());
 		System.out.println("2.ぼうぎょ       Lv." + (heros[1].getLevel() + 1) + " " + heros[1].getName() + "   HP:"
-				+ heros[1].getHp() + "  MP:"
-				+ heros[1].getMp());
+				+ heros[1].getHp() + "  MP:" + heros[1].getMp());
 		System.out.println("3.逃げる      Lv." + (heros[2].getLevel() + 1) + " " + heros[2].getName() + "  HP:"
-				+ heros[2].getHp() + "   MP:"
-				+ heros[2].getMp());
+				+ heros[2].getHp() + "   MP:" + heros[2].getMp());
 		System.out.println("=========================================");
 		System.out.print("\n>>");
 	}
 
 	// 引数で渡されたパーティーメンバーのステータスを表示
-	public static void showAllStatus(Human[] heros) {
-		System.out.println("=========================================");
-		System.out
-				.println("Lv." + (heros[0].getLevel() + 1) + " " + heros[0].getName() + "   HP:" + heros[0].getHp()
-						+ "  MP:" + heros[0].getMp());
-		System.out
-				.println("Lv." + (heros[1].getLevel() + 1) + " " + heros[1].getName() + "   HP:" + heros[1].getHp()
-						+ "  MP:" + heros[1].getMp());
-		System.out
-				.println("Lv." + (heros[2].getLevel() + 1) + " " + heros[2].getName() + "  HP:" + heros[2].getHp()
-						+ "   MP:" + heros[2].getMp());
-		System.out.println("=========================================");
+	public static void showAllStatus(app.asset.character.Character[] chara) {
+		for (app.asset.character.Character c : chara) {
+			System.out.println(c);
+		}
 	}
 
 	// ステータスマスターテーブルから、すべての値を出力する
 	// デバッグチェック用
-	public static void showAllStatus() {
+	public static void showAllStatusTable() {
 		for (int[][] num : heroStatusTable.heroStatusMaster) {
 			int lv = 1;
 			System.out.println("各レベルごとのヒーローのステータス ** HP/ MP/ ATK/ DEF/ レベルアップに必要な経験値 **");
