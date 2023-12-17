@@ -8,6 +8,7 @@ import app.asset.character.Human;
 import app.asset.character.Warrior;
 import app.logic.Util;
 import app.model.Debug;
+import app.model.Dungeon;
 import app.model.Field;
 import app.model.Inn;
 import app.view.View;
@@ -17,6 +18,7 @@ import app.view.View;
  * 勇者インスタンスの生成もここで行う
  */
 public class Controller {
+	public Dungeon dungeon;
 	public Field field;
 	public Inn inn = new Inn();
 	public Debug debug;
@@ -48,6 +50,7 @@ public class Controller {
 		this.heros[2] = this.mage;
 
 		// 各インスタンスへ勇者のインスタンスを代入
+		dungeon.heros = this.heros;
 		field.heros = this.heros;
 		inn.humans = this.heros;
 		debug.humans = this.heros;
@@ -73,12 +76,13 @@ public class Controller {
 		this.heros[2] = this.mage;
 		
 		// 各インスタンスへ勇者のインスタンスを代入
+		dungeon.heros = this.heros;
 		field.heros = this.heros;
 		inn.humans = this.heros;
 		debug.humans = this.heros;
 		
 		//デバッグインスタンスへ各インスタンスを代入
-		debug.field = this.field;
+		debug.field = this.dungeon;
 		debug.inn = this.inn;
 
 
@@ -168,7 +172,7 @@ public class Controller {
 
 			switch (nextAction) {
 			case "1":
-				field.start();
+				dungeon.start();
 				break;
 			case "2":
 				inn.start();

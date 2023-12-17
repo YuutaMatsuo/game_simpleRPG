@@ -68,6 +68,12 @@ public abstract class Human extends Character {
 		}
 		return exp > nextExp;
 	}
+	
+	// 宿屋で一休みする処理 (HPを全回復)
+	public void sleep() {
+		super.setHp(this.maxHp);
+		System.out.println(super.getName() + "は一休みした");
+	}
 
 	// レベルアップ処理
 	public abstract void levelUp();
@@ -87,5 +93,13 @@ public abstract class Human extends Character {
 
 	public void setDefendMode(boolean defendMode) {
 		this.defendMode = defendMode;
+	}
+
+	public static int getGold() {
+		return gold;
+	}
+
+	public static void setGold(int gold) {
+		Human.gold = gold;
 	}
 }

@@ -9,7 +9,7 @@ import app.view.View;
 
 public class Debug {
 	public Controller controller;
-	public Field field;
+	public Dungeon field;
 	public Inn inn;
 
 	public Human[] humans;
