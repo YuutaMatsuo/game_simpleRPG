@@ -2,12 +2,12 @@ package app.model;
 
 import java.util.Scanner;
 
-import app.asset.character.Hero;
+import app.asset.character.Human;
 import app.logic.Util;
 import app.view.View;
 
 public class Inn {
-	public Hero[] heros;
+	public Human[] humans;
 	
 	//	宿屋　HPを全回復する
 	public void start() {
@@ -17,7 +17,7 @@ public class Inn {
 		
 		while(true) {
 		System.out.println("宿屋で一休みすることでHPやMPが全回復します\n\n\n一休みしますか？ １泊 500G");
-		System.out.println("現在の所持金:" + heros[0].gold + "G");
+		System.out.println("現在の所持金:" + Human.getGold() + "G");
 		View.scroll(4);
 		System.out.println("1.ひと休みする");
 		System.out.println("2.やっぱりやめる");
@@ -35,8 +35,8 @@ public class Inn {
 			case "1":
 				System.out.println("\nゆっくり休んでいってくださいね！");
 				View.scroll(4);
-				Util.allHeal(heros);
-				heros[0].gold -= 500;
+				Util.allHeal(humans);
+				Human.setGold(Human.getGold() - 500);
 				View.load();
 				View.scroll(2);
 				System.out.println("おはようございます！\nよく眠れましたか？\nまたのご利用お待ちしています。");

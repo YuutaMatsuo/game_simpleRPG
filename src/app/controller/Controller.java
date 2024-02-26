@@ -2,9 +2,13 @@ package app.controller;
 
 import java.util.Scanner;
 
-import app.asset.character.Hero;
+import app.asset.character.Blackmage;
+import app.asset.character.Brave;
+import app.asset.character.Human;
+import app.asset.character.Warrior;
 import app.logic.Util;
 import app.model.Debug;
+import app.model.Dungeon;
 import app.model.Field;
 import app.model.Inn;
 import app.view.View;
@@ -14,20 +18,20 @@ import app.view.View;
  * 勇者インスタンスの生成もここで行う
  */
 public class Controller {
+	public Dungeon dungeon;
 	public Field field;
 	public Inn inn = new Inn();
 	public Debug debug;
 
-	Hero[] heros = new Hero[3];
-	Hero hero;
-	Hero warrior;
-	Hero mage;
+	Human[] heros = new Human[3];
+	Brave brave;
+	Warrior warrior;
+	Blackmage mage;
 
 	// コンストラクタ
 	public Controller() {
-		this.hero = new Hero("勇者", 0);
-		this.warrior = new Hero("戦士", 1);
-		this.mage = new Hero("魔法使い", 2);
+		this.warrior = new Warrior("戦士", 1);
+		this.mage = new Blackmage("魔法使い", 2);
 	}
 
 	// ゲーム開始時に呼び出されるメソッド
@@ -38,21 +42,22 @@ public class Controller {
 		System.out.println("勇者の名前を入力してください");
 		System.out.print(">>");
 
-		String name = Util.scanner.nextLine();
+		String name = new Scanner(System.in).nextLine();
 		// ヒーローテーブルを参照して勇者を生成する
-		this.hero.name += name;
-		this.heros[0] = this.hero;
+		this.brave = new Brave(name, 0);
+		this.heros[0] = this.brave;
 		this.heros[1] = this.warrior;
 		this.heros[2] = this.mage;
 
 		// 各インスタンスへ勇者のインスタンスを代入
+		dungeon.heros = this.heros;
 		field.heros = this.heros;
-		inn.heros = this.heros;
-		debug.heros = this.heros;
+		inn.humans = this.heros;
+		debug.humans = this.heros;
 
 		View.scrollSlow(2);
 
-		System.out.println("ようこそ" + this.hero.name + "さん");
+		System.out.println("ようこそ" + this.brave.getName() + "さん");
 		View.wait(1);
 		System.out.println("冒険の仲間として戦士と魔法使いも旅に同行します！\n３人で色々なモンスターと戦ってみましょう！");
 		View.scroll(6);
@@ -63,20 +68,21 @@ public class Controller {
 	// ヒーローのステータスを設定する
 	public void debugInitialize() {
 		// ヒーローテーブルを参照して勇者を生成する
-		this.hero = new Hero("テスト勇者", 0);
-		this.warrior = new Hero("テスト戦士", 1);
-		this.mage = new Hero("テスト魔法使い", 2);
-		this.heros[0] = this.hero;
+		this.brave = new Brave("Test", 0);
+		this.warrior = new Warrior("Test", 1);
+		this.mage = new Blackmage("Test", 2);
+		this.heros[0] = this.brave;
 		this.heros[1] = this.warrior;
 		this.heros[2] = this.mage;
 		
 		// 各インスタンスへ勇者のインスタンスを代入
+		dungeon.heros = this.heros;
 		field.heros = this.heros;
-		inn.heros = this.heros;
-		debug.heros = this.heros;
+		inn.humans = this.heros;
+		debug.humans = this.heros;
 		
 		//デバッグインスタンスへ各インスタンスを代入
-		debug.field = this.field;
+		debug.field = this.dungeon;
 		debug.inn = this.inn;
 
 
@@ -166,7 +172,7 @@ public class Controller {
 
 			switch (nextAction) {
 			case "1":
-				field.start();
+				dungeon.start();
 				break;
 			case "2":
 				inn.start();

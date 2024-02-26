@@ -2,20 +2,20 @@ package app.model;
 
 import java.util.Scanner;
 
-import app.asset.character.Hero;
+import app.asset.character.Human;
 import app.controller.Controller;
 import app.logic.Util;
 import app.view.View;
 
 public class Debug {
 	public Controller controller;
-	public Field field;
+	public Dungeon field;
 	public Inn inn;
 
-	public Hero[] heros;
-	public Hero hero;
-	public Hero warrior;
-	public Hero mage;
+	public Human[] humans;
+	public Human human;
+	public Human warrior;
+	public Human mage;
 
 	// デバッグメニュー 機能の確認用 各種処理へのショートカット
 	public void debugMenu() {
